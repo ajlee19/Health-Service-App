@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
                     int sbp = row.getCell(sbpIndex);
                     int hr = row.getCell(hrIndex);
                     int rpp = Math.round((sbp*hr)/10000);
+
+                    TextView hrVal = (TextView) findViewById(R.id.heart_rate);
+                    TextView rppVal = (TextView) findViewById(R.id.rpp);
+                    hrVal.setText(String.valueOf(hr));
+                    rppVal.setText(String.valueOf(rpp));
                 }
             }
         } catch (Exception e) {
