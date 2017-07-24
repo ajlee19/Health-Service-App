@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_about"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/about_header"
+        android:text="@string/about_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:textSize="32sp"/>
+
+    <TextView
+        android:id="@+id/about_contents1"
+        android:text="@string/about_contents1"
+        android:layout_below="@id/about_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/about_header"
+        android:layout_alignLeft="@id/about_header"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"/>
+
+    <TextView
+        android:id="@+id/about_contents2"
+        android:text="@string/about_contents2"
+        android:layout_below="@id/about_contents1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/about_header"
+        android:layout_alignLeft="@id/about_header"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"/>
+
+    <TextView
+        android:id="@+id/about_contents3"
+        android:text="@string/about_contents3"
+        android:layout_below="@id/about_contents2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/about_header"
+        android:layout_alignLeft="@id/about_header"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"/>
+
+    <TextView
+        android:id="@+id/about_signature"
+        android:text="@string/about_signature"
+        android:layout_below="@id/about_contents3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/about_header"
+        android:layout_alignLeft="@id/about_header"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"/>
+
+    <Button
+        android:id="@+id/button_id"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/about_button"
+        android:onClick="sendMessage"
+        android:style="?android:attr/borderlessButtonStyle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@id/about_header"
+        android:layout_marginBottom="48dp"
+        android:layout_marginRight="48dp"
+        />
+
+</RelativeLayout>
+
