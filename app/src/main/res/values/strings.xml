@@ -19,9 +19,9 @@
     <string name="connect">View Exercise Suggestions</string>
     <string name="main_page_title">Measure RPP</string>
     <string name="heart_rate_label">Heart Rate: </string>
-    <string name="heart_rate">COMPUTED HEART RATE</string>
+    <string name="heart_rate"> </string>
     <string name="rpp_label">RPP: </string>
-    <string name="rpp">COMPUTED RPP</string>
+    <string name="rpp"> </string>
 
     <!--Exercise Screen-->
     <string name="exercise_page_title">Personalized Exercise Suggestion</string>
