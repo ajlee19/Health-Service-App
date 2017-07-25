@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="portrait"
+    android:screenOrientation="portrait"
     android:id="@+id/exercise_suggestion_activity_view">
 
     <!--TITLE-->
@@ -36,7 +36,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_below="@id/divider"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="8dp" />
     <TextView
         android:id="@+id/heart_rate_label"
         android:text="@string/average_heart_rate_label"
@@ -70,7 +70,7 @@
         android:layout_alignLeft="@id/heart_rate_icon"
         android:id="@+id/rpp_icon"
         android:layout_below="@id/heart_rate_icon"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="8dp" />
     <TextView
         android:id="@+id/rpp_label"
         android:text="@string/average_rpp_label"
@@ -101,7 +101,7 @@
         android:layout_alignStart="@id/heart_rate_icon"
         android:layout_alignLeft="@id/heart_rate_icon"
         android:layout_below="@id/rpp_icon"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:id="@+id/exerise_icon"/>
     <TextView
         android:text="@string/exercise_label"
@@ -141,7 +141,6 @@
         android:layout_width="wrap_content"
         android:text="@string/return_to_mearement_button"
         android:onClick="sendMessage"
-        android:style="?android:attr/borderlessButtonStyle"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="48dp"
