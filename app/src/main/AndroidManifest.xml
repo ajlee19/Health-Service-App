@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ashleylee.rpp_demo">
+
     <!-- <uses-permission android:name="android.permission.BLUETOOTH" /> -->
     <!-- <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> -->
     <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
@@ -10,11 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <!-- Start with About page -->
-        <activity
-            android:name=".About"
-            android:configChanges="keyboardHidden"
-            android:screenOrientation="portrait">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,23 +19,18 @@
             </intent-filter>
         </activity>
 
-        <!-- Intro pages -->
-        <activity
-            android:name=".AboutBp"
-            android:label="@string/title_activity_about_bp"
-            android:theme="@style/AppTheme"></activity>
+        <!-- User Input: Input cal data ADD MORE AFTER IMPLEMENTING CALIBRATION AND BP CO -->
 
-        <!-- User Input: Input cal data ADD MORE AFTER IMPLEMENTING CALIBRATION AND BP ESTIMATION-->
 
         <!-- Main RPP indication page -->
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <!-- Exercise suggestion -->
-        <activity android:name=".ExerciseSuggestion"></activity>
+        <activity android:name=".ExerciseSuggestion" />
 
     </application>
 
