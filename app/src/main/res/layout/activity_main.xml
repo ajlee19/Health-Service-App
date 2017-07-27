@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/main_page_title"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp" />
@@ -30,23 +31,22 @@
         android:text="@string/measure_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/divider"
+        android:layout_marginEnd="14dp"
+        android:layout_below="@+id/divider"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:onClick="measureRpp"
-        />
+        android:onClick="measureRpp"/>
 
     <!--HR-->
     <ImageView
         android:id="@+id/heart_rate_icon"
+        app:srcCompat="@drawable/ic_heart"
         android:contentDescription="@string/heart_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_heart"
+        android:layout_below="@id/measure_button"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_below="@id/measure_button"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="16dp" />
     <TextView
         android:id="@+id/heart_rate_label"
         android:text="@string/heart_rate_label"
@@ -72,13 +72,13 @@
 
     <!--RPP-->
     <ImageView
+        android:id="@+id/rpp_icon"
         android:contentDescription="@string/rpp_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_pulse"
         android:layout_alignStart="@id/heart_rate_icon"
         android:layout_alignLeft="@id/heart_rate_icon"
-        android:id="@+id/rpp_icon"
         android:layout_below="@id/heart_rate_icon"
         android:layout_marginTop="8dp" />
     <TextView
@@ -102,6 +102,16 @@
         android:layout_marginStart="10dp"
         android:id="@+id/rpp" />
 
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:layout_below="@id/rpp_label"
+        android:layout_marginTop="24dp"
+        android:layout_alignStart="@id/rpp_icon"
+        android:layout_alignLeft="@id/rpp_icon"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp"
+        android:id="@+id/graph" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/main_button"
@@ -113,8 +123,7 @@
         android:layout_marginBottom="24dp"
         android:drawableLeft="@drawable/ic_run"
         android:drawableStart="@drawable/ic_run"
-        android:onClick="sendMessage"
-    />
+        android:onClick="viewRPPAnalysis"/>
 
     <TextView
         android:id="@+id/textView"
@@ -122,7 +131,16 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/main_button"
         android:layout_alignLeft="@id/page_label"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/rpp_summary" />
+
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progressBar"-->
+        <!--style="?android:attr/progressBarStyleLarge"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@+id/rpp"-->
+        <!--android:layout_alignEnd="@+id/graph"-->
+        <!--android:layout_marginEnd="48dp" />-->
 
 </RelativeLayout>
