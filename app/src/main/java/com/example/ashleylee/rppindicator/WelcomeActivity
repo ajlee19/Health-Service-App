@@ -80,7 +80,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private void launchHomeScreen() {
         // not needed now
         // prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, Calibration.class));
     }
 
     /**
@@ -106,6 +106,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private int getItem(int i) {
+
         return viewPager.getCurrentItem() + i;
     }
 
