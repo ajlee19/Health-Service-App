@@ -1,74 +1,81 @@
 package ashleylee.rpp_demo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView
+import android.widget.ProgressBar;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.IOException;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.util.WorkbookUtil;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import sds.mhs.android.BPAlgorithm;
 
 public class MainActivity extends AppCompatActivity {
+
+    private BPAlgorithm bp;
+    private SensorManager sensorManager;
+    private Sensor hrm;
+    private final Handler mHandler = new Handler();
+    private Runnable mTimer1;
+    private Runnable mTimer2;
+    private LineGraphSeries<DataPoint> mSeries1;
+    private LineGraphSeries<DataPoint> mSeries2;
+    private double graph2LastXValue = 5d;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
+        hrm = sensorManager.getDefaultSensor(65584); // WHAT IS THE SENSOR TYPE
+
+        //spinner = (ProgressBar)findViewById(R.id.progressBar);
+        //spinner.setVisibility(View.GONE);
+
+        // for now
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        //LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                //new DataPoint(0, 1)
+        //});
+        //graph.addSeries(series);
     }
 
-    /** Called when the user touches the button */
-    public void sendMessage(View view) {
+    public void measureRpp(View view){
+        //spinner.setVisibility(View.VISIBLE);
+        turnOnSensor();
+
+        turnOffSensor();
+        //spinner.setVisibility(View.GONE);
+    }
+
+    SensorEventListener sensorEventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {}
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+    };
+
+    public void viewRPPAnalysis(View view) {
         Intent intent = new Intent(this, ExerciseSuggestion.class);
         startActivity(intent);
     }
 
-    public void measureRpp(View view){
-        String FileName = "";
-        readFile(FileName);
+    private void turnOnSensor(){
+        sensorManager.registerListener(sensorEventListener, hrm, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-    /**
-     * Read designated file containing SBP and HR and compute RPP
-     * @param FileName file to read
-     */
-    private void readFile(String FileName){
-        int sbpIndex = 1;
-        int hrIndex = 2;
-        InputStream stream = getResources().openRawResource(R.raw.rpp_info);
-        try {
-            XSSFWorkbook workbook = new XSSFWorkbook(stream);
-            XSSFSheet sheet = workbook.getSheetAt(0);
-            int rowsCount = sheet.getPhysicalNumberOfRows();
-
-            for (int r = 0; r<rowsCount; r++) {
-                Row row = sheet.getRow(r);
-
-                if (row != null){
-                    int sbp = row.getCell(sbpIndex);
-                    int hr = row.getCell(hrIndex);
-                    int rpp = Math.round((sbp*hr)/10000);
-
-                    TextView hrVal = (TextView) findViewById(R.id.heart_rate);
-                    TextView rppVal = (TextView) findViewById(R.id.rpp);
-                    hrVal.setText(String.valueOf(hr));
-                    rppVal.setText(String.valueOf(rpp));
-                }
-            }
-        } catch (Exception e) {
-            printlnToUser(e.toString());
+    private void turnOffSensor(){
+        if (sensorManager != null){
+            sensorManager.unregisterListener(sensorEventListener);
         }
-
     }
 }
