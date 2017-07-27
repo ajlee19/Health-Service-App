@@ -13,15 +13,39 @@
 
     <!--Welcome: second BP and HR page-->
     <string name="welcome_second_header">Blood Pressure and HR</string>
-    <string name="welcome_second_content1">BP......HR....</string>
+    <string name="welcome_second_content1">Blood Pressure (BP) and Heart Rate (HR) are the two most commonly used vital signs...</string>
+    <string name="welcome_second_content2">Blood Pressure are typically indicated as SBP / DBP. Systolic BP (SBP) being the max BP, and Diastolic BP (DBP) the minimum. </string>
+    <string name="welcome_second_content3">Normal BP is around 120/90; above is considered hyperyensive and below is considered as hypotensive</string>
+    <string name="welcome_second_content4">
+        It is important to be aware of one\s BP; hypertension, often referred to as the \Silent Killer,\ is the most common cardiovascular disease in America.
+        It can be easily induced by various daily activities, such as caffeine or alcohol intake, stress, and consumption of salty foods.
+        However, keeping up with BP is not a easy thing to do for many people, especially for those living busy lives.
+        Furthermore, the reliability of the measurement made through irregular visits to hospitals is often compromised by the White Coat Effect.
+        Hence, constant and frequent monitoring with smartphones will change many people\s lives</string>
 
     <!--Welcome: third RPP page-->
     <string name="welcome_third_header">Rate Pressure Product</string>
-    <string name="welcome_third_content">Rate Pressure Prodcut (RPP) = SBP X HR...Reference...</string>
+    <string name="welcome_third_content1">
+        The importance of BP measurement is limited without personalized treatment to keep BP in a desirable range.
+        Not only for those suffering from hypertension, but also for normal people, exercising is one of the most effective ways to keep the BP in a health level and stay fit</string>
+    <string name="welcome_third_content2">
+        However, everyone has different cardio-capacity and it is often difficult to find the most optimal work-out routine.
+        Such concerns can be relieved with the Rate Pressure Product that can be measured from one\s smartphones at anywhere at anytime.
+         </string>
+    <string name="welcome_third_content3">
+        Rate Pressure Product (RPP) = SBP X HR. Previously, there were attempts of measuring physical stress level only based on HR.
+        RPP, can provide more comprehensive info since BP and HR are combined
+    </string>
 
     <!--Welcome: fourth RPP Service page-->
     <string name="welcome_fourth_header">RPP and Exercise</string>
-    <string name="welcome_fourth_content">RPP can be used to determine the exercise intensity....Based on the recovery time...</string>
+    <string name="welcome_fourth_content1">RPP can be used to determine the exercise intensity and based on the recovery time it can be used to find a work out routine that is most efficient for each individual. </string>
+    <string name="welcome_fourth_content2">References and characteristics of each level...</string>
+
+    <!--Calibration Screen-->
+    <string name="cal_header">User Calibration</string>
+    <string name="cal_button">Calibrate</string>
+    <string name="cal_button_done">Done</string>
 
     <!--Measurement Screen-->
     <string name="divider">This is a content divider</string>
@@ -49,7 +73,4 @@
     <string name="exercise_suggestion">SHOW PERSONALIZED WOURKOUT ROUTINE</string>
     <string name="return_to_mearement_button">PREVIOUS</string>
 
-    <string name="title_activity_about_bp">Blood Pressure and Heart Rate</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
