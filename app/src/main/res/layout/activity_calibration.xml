@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main_activity_view">
+
+    <!--TITLE-->
+    <TextView
+        android:id="@+id/cal_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cal_header"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp" />
+
+    <ImageView
+        android:id="@+id/divider"
+        android:contentDescription="@string/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:scaleType="center"
+        android:layout_below="@id/cal_label"
+        android:src="@drawable/divider" />
+
+    <EditText
+        android:id="@+id/name_input"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        android:ems="7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_alignStart="@id/cal_label"/>
+
+    <EditText
+        android:id="@+id/age_input"
+        android:inputType="number"
+        android:hint="Age"
+        android:ems="7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_input"
+        android:layout_alignStart="@id/name_input"/>
+
+    <EditText
+        android:id="@+id/sbp_input"
+        android:inputType="number"
+        android:hint="Systolic BP"
+        android:ems="7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/age_input"
+        android:layout_alignStart="@id/age_input"/>
+
+    <EditText
+        android:id="@+id/dbp_input"
+        android:inputType="number"
+        android:hint="Diastolic BP"
+        android:ems="7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sbp_input"
+        android:layout_alignStart="@id/sbp_input"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/cal_button"
+        android:text="@string/cal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:onClick="calibrate"
+        android:layout_toStartOf="@+id/measure_button" />
+
+    <ProgressBar
+        android:id="@+id/progressBarCal"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dbp_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp" />
+
+</RelativeLayout>
