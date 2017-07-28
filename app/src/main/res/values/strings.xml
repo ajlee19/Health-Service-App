@@ -14,9 +14,8 @@
     <!--Welcome: second BP and HR page-->
     <string name="welcome_second_header">Blood Pressure and HR</string>
     <string name="welcome_second_content1">Blood Pressure (BP) and Heart Rate (HR) are the two most commonly used vital signs...</string>
-    <string name="welcome_second_content2">Blood Pressure are typically indicated as SBP / DBP. Systolic BP (SBP) being the max BP, and Diastolic BP (DBP) the minimum. </string>
-    <string name="welcome_second_content3">Normal BP is around 120/90; above is considered hyperyensive and below is considered as hypotensive</string>
-    <string name="welcome_second_content4">
+    <string name="welcome_second_content2">Blood Pressure are typically indicated as SBP / DBP. Systolic BP (SBP) being the max BP, and Diastolic BP (DBP) the minimum. Normal BP is around 120/90; above is considered hyperyensive and below is considered as hypotensive</string>
+    <string name="welcome_second_content3">
         It is important to be aware of one\s BP; hypertension, often referred to as the \Silent Killer,\ is the most common cardiovascular disease in America.
         It can be easily induced by various daily activities, such as caffeine or alcohol intake, stress, and consumption of salty foods.
         However, keeping up with BP is not a easy thing to do for many people, especially for those living busy lives.
@@ -55,22 +54,22 @@
     <string name="connect">View Exercise Suggestions</string>
     <string name="main_page_title">Measure RPP</string>
     <string name="heart_rate_label">Heart Rate: </string>
-    <string name="heart_rate">COMPUTED HEART RATE</string>
+    <string name="heart_rate"> </string>
     <string name="rpp_label">RPP: </string>
-    <string name="rpp">COMPUTED RPP</string>
-    <string name="rpp_summary">SUMMARY OF CURRENT RPP GOES HERE</string>
+    <string name="rpp"> </string>
+    <string name="rpp_summary">Please Measure RPP</string>
     <string name="measure_button">Measure RPP</string>
     <string name="rpp_result_button">View RPP Analysis</string>
 
     <!--Exercise Screen-->
     <string name="exercise_page_title">Personalized Exercise Suggestion</string>
     <string name="average_heart_rate_label">Average HR: </string>
-    <string name="average_heart_rate">COMPUTED HEART RATE</string>
+    <string name="average_heart_rate"> </string>
     <string name="average_rpp_label">Average RPP: </string>
-    <string name="average_rpp">COMPUTED RPP</string>
+    <string name="average_rpp"> </string>
     <string name="exercise_label">Exercise Intensity: </string>
-    <string name="exercise">EXERCISE SUMMARY</string>
-    <string name="exercise_suggestion">SHOW PERSONALIZED WOURKOUT ROUTINE</string>
+    <string name="exercise"> </string>
+    <string name="exercise_suggestion">Please measure your RPP</string>
     <string name="return_to_mearement_button">PREVIOUS</string>
 
 </resources>
