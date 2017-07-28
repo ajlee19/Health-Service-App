@@ -126,13 +126,14 @@
         android:onClick="viewRPPAnalysis"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/shortSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/main_button"
-        android:layout_alignLeft="@id/page_label"
-        android:layout_marginBottom="24dp"
-        android:text="@string/rpp_summary" />
+        android:text="@string/rpp_summary"
+        android:layout_below="@+id/graph"
+        android:layout_alignStart="@id/rpp_icon"
+        android:layout_alignLeft="@id/rpp_icon"/>
+
 
     <!--<ProgressBar-->
         <!--android:id="@+id/progressBar"-->
