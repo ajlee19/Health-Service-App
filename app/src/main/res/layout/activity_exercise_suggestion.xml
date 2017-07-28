@@ -59,7 +59,7 @@
         android:layout_toEndOf="@id/heart_rate_label"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:id="@+id/heart_rate" />
+        android:id="@+id/avg_heart_rate" />
 
     <!--RPP-->
     <ImageView
@@ -91,7 +91,7 @@
         android:layout_toEndOf="@id/rpp_label"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:id="@+id/rpp" />
+        android:id="@+id/avg_rpp" />
 
     <!--EXERCISE-->
     <ImageView
