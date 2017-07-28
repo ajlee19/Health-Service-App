@@ -8,7 +8,52 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ashleylee.rpp_demo">
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+
+    <!--<uses-feature android:name="android.hardware.Sensor"/>-->
+    <!--<uses-feature android:name="android.hardware.SensorEvent"/>-->
+    <!--<uses-feature android:name="android.hardware.SensorEventListener"/>-->
+    <!--<uses-feature android:name="android.hardware.SensorEventCallback"/>-->
+    <!--<uses-feature android:name="android.hardware.SensorManager"/>-->
+
+
+    <application
+
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- User Input: Input cal data ADD MORE AFTER IMPLEMENTING CALIBRATION AND BP CO -->
+        <activity android:name=".Calibration"></activity>
+
+        <!-- Main RPP indication page -->
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
+        <!-- Exercise suggestion -->
+        <activity android:name=".ExerciseSuggestion" />
+
+    </application>
+
+</manifest>
         android:theme="@style/AppTheme">
 
         <activity android:name=".WelcomeActivity">
