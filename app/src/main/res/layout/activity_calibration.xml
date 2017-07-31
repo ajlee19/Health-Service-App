@@ -35,39 +35,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/divider"
+        android:layout_marginTop="16dp"
         android:layout_alignStart="@id/cal_label"/>
 
     <EditText
-        android:id="@+id/age_input"
+        android:id="@+id/sbp_input"
         android:inputType="number"
-        android:hint="Age"
-        android:ems="7"
+        android:hint="SBP"
+        android:ems="4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name_input"
         android:layout_alignStart="@id/name_input"/>
 
-    <EditText
-        android:id="@+id/sbp_input"
-        android:inputType="number"
-        android:hint="Systolic BP"
-        android:ems="7"
+    <TextView
+        android:id="@+id/slash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/age_input"
-        android:layout_alignStart="@id/age_input"/>
+        android:layout_below="@id/name_input"
+        android:layout_toRightOf="@id/sbp_input"
+        android:text=" / "
+        android:textSize="32sp"/>
 
     <EditText
         android:id="@+id/dbp_input"
         android:inputType="number"
-        android:hint="Diastolic BP"
-        android:ems="7"
+        android:hint="DBP"
+        android:ems="4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sbp_input"
+        android:layout_below="@id/name_input"
+        android:layout_toRightOf="@id/slash" />
+
+    <EditText
+        android:id="@+id/hr_input"
+        android:inputType="number"
+        android:hint="HR"
+        android:ems="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dbp_input"
         android:layout_alignStart="@id/sbp_input"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/cal_button"
         android:text="@string/cal_button"
         android:layout_width="wrap_content"
@@ -83,8 +93,19 @@
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dbp_input"
+        android:layout_above="@+id/cal_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="59dp" />
+        android:layout_marginBottom="32dp" />
+
+    <!--<Button-->
+        <!--android:id="@+id/skip_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBottom="@+id/divider"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginEnd="10dp"-->
+        <!--android:background="@null"-->
+        <!--android:text="Skip" -->
+        <!--android:onClick="skipToMain"/>-->
 
 </RelativeLayout>
