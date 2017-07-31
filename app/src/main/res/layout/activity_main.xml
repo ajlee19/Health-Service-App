@@ -25,8 +25,7 @@
         android:scaleType="center"
         android:layout_below="@id/page_label"
         android:src="@drawable/divider" />
-
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/measure_button"
         android:text="@string/measure_button"
         android:layout_width="wrap_content"
@@ -113,7 +112,7 @@
         android:layout_marginEnd="24dp"
         android:id="@+id/graph" />
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/main_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,24 +123,5 @@
         android:drawableLeft="@drawable/ic_run"
         android:drawableStart="@drawable/ic_run"
         android:onClick="viewRPPAnalysis"/>
-
-    <TextView
-        android:id="@+id/shortSum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rpp_summary"
-        android:layout_below="@+id/graph"
-        android:layout_alignStart="@id/rpp_icon"
-        android:layout_alignLeft="@id/rpp_icon"/>
-
-
-    <!--<ProgressBar-->
-        <!--android:id="@+id/progressBar"-->
-        <!--style="?android:attr/progressBarStyleLarge"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/rpp"-->
-        <!--android:layout_alignEnd="@+id/graph"-->
-        <!--android:layout_marginEnd="48dp" />-->
 
 </RelativeLayout>
