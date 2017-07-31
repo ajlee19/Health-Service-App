@@ -1,4 +1,4 @@
-package ashleylee.rpp_demo;
+package  com.samsung.rpp_demo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,12 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import samsung.rpp_demo.R;
 
 public class ExerciseSuggestion extends AppCompatActivity {
 
-    private ArrayList<Integer> hrData, rppData;
-    private int hrAvg, rppAvg;
+    private int hrAvg, rppAvg, sbpOffset;
+    private double[] features;
     private TextView hrText, rppText, exText, suggestText;
 
     @Override
@@ -20,28 +20,28 @@ public class ExerciseSuggestion extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_suggestion);
 
         Intent intent = getIntent();
-        hrData = intent.getIntegerArrayListExtra("hrData");
-        rppData = intent.getIntegerArrayListExtra("rppData");
+        hrAvg = intent.getIntExtra("hrAvg",0);
+        rppAvg = intent.getIntExtra("rppAvg",0);
+        sbpOffset = intent.getIntExtra("sbpOffset",0);
+        features = intent.getDoubleArrayExtra("features");
 
-        if (hrData.size() > 0 && rppData.size() > 0){
-            setText(hrData, rppData);
+        if (hrAvg > 0 && rppAvg > 0){
+            setText(hrAvg, rppAvg);
         }
     }
 
-    /** Called when the user touches the button */
+    /** Back to Main */
     public void sendMessage(View view) {
-        // return back to the main page
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("features", features);
+        intent.putExtra("sbpOffset", sbpOffset);
         startActivity(intent);
     }
 
-    private void setText(ArrayList<Integer> hrData, ArrayList<Integer> rppData){
+    private void setText(int hrAvg, int rppAvg){
         hrText = (TextView) findViewById(R.id.avg_heart_rate);
         rppText = (TextView) findViewById(R.id.avg_rpp);
         exText = (TextView) findViewById(R.id.exercise_summary);
-
-        hrAvg = calculateAverage(hrData);
-        rppAvg = calculateAverage(rppData);
 
         hrText.setText(String.valueOf(hrAvg));
         rppText.setText(String.valueOf(rppAvg));
@@ -70,11 +70,5 @@ public class ExerciseSuggestion extends AppCompatActivity {
         }else{
             suggestText.setText("Very Danger");
         }
-    }
-
-    private int calculateAverage(ArrayList<Integer> data){
-        int tot = 0;
-        for (Integer i: data){tot += i;}
-        return Math.round(tot/data.size());
     }
 }
