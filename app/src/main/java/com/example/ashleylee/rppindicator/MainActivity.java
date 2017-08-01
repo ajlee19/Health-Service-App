@@ -1,6 +1,7 @@
 package  com.samsung.rpp_demo;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,12 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.samsung.sds.mhs.android.BPAlgorithm;
 import com.samsung.sds.mhs.android.BpEventListener;
+
 import java.util.ArrayList;
+
 import samsung.rpp_demo.R;
 
 public class MainActivity extends AppCompatActivity implements BpEventListener {
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
     private GraphView graph;
     private LineGraphSeries<DataPoint> series;
+    private double xVal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +62,24 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         rppData = new ArrayList<>();
 
         graph = (GraphView) findViewById(R.id.graph);
-        series = new LineGraphSeries<DataPoint>(new DataPoint[] {});
+        series = new LineGraphSeries<DataPoint>();
         graph.addSeries(series);
+        graph.getGridLabelRenderer().setVerticalLabelsVisible(false); // remove vertical grid
+        // set vertical axis
+        Viewport viewport = graph.getViewport();
+        viewport.setYAxisBoundsManual(true);
+        viewport.setMinY(5);
+        viewport.setMaxY(25);
+        viewport.setScrollable(true);
+//        viewport.setXAxisBoundsManual(true);
+//        viewport.setMinY(0);
+//        viewport.setMaxY(xVal);
+//        viewport.scrollToEnd();
+        series.setThickness(8);
+        series.setDrawBackground(true);
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
 
         bpAlgorithm = new BPAlgorithm(this);
         bpAlgorithm.setBpChangedListener(this);
@@ -87,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
             switch (event.sensor.getType()) {
                 case 65584:
                     bpAlgorithm.pushData((int)event.values[2]);
-//                    Log.d("test","value : "+ event.values[2]);
                     break;
             }
         }
@@ -102,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
         rppText.setText(String.valueOf(rppMeasured));
         hrText.setText(String.valueOf(hr));
-
+        series.appendData(new DataPoint(xVal++, rppMeasured), true, 1000);
         hrData.add((int) hr);
         rppData.add(rppMeasured);
     }
