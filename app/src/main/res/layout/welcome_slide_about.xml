@@ -12,9 +12,9 @@
         android:text="@string/about_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:textSize="32sp"/>
 
     <TextView
@@ -64,18 +64,5 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"/>
-
-    <!--<Button-->
-        <!--android:id="@+id/button_id"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:text="@string/about_button"-->
-        <!--android:onClick="sendMessage"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignRight="@id/about_header"-->
-        <!--android:layout_marginBottom="48dp"-->
-        <!--android:layout_marginRight="48dp"-->
-        <!--/>-->
 
 </RelativeLayout>
