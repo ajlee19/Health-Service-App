@@ -2,47 +2,70 @@
     <string name="app_name">RPP Demo</string>
 
     <!--Welcome: first about page-->
-    <string name="about_header">Welcome to RPP Demo App</string>>
-    <string name="about_contents1">A demonstration application providing RPP information to the client.</string>
+    <string name="about_header">Welcome to RPP Demonstration App</string>>
+    <string name="about_contents1">A demonstration application providing Rate Pressure Product (RPP) information and related services to the client.</string>
     <string name="about_contents2">
-        Contents include brief information of blood pressure (BP) and heart rate (HR), followed by the significance of rate pressure product (RPP).
-        Based on the values of RPP, the app provides personalized suggestions for optimal workout routine </string>
-    <string name="about_contents3">The app is consisted of three parts: introduction, rpp measurement, and exercise suggestion</string>
-    <string name="about_signature">Created by Jieun Ashley Lee of New Device Lab</string>
-    <string name="about_button">Continue</string>
+        Contents include brief background of blood pressure (BP), heart rate (HR), and rate pressure product (RPP).
+        Based on the values of RPP, the app suggests personalized and optimal workout routine. </string>
+    <string name="about_contents3">The app consists of four parts: introduction, calibration, rpp measurement, and exercise suggestion.</string>
+    <string name="about_signature">By Jieun Ashley Lee of New Device Lab</string>
 
     <!--Welcome: second BP and HR page-->
     <string name="welcome_second_header">Blood Pressure and HR</string>
-    <string name="welcome_second_content1">Blood Pressure (BP) and Heart Rate (HR) are the two most commonly used vital signs...</string>
-    <string name="welcome_second_content2">Blood Pressure are typically indicated as SBP / DBP. Systolic BP (SBP) being the max BP, and Diastolic BP (DBP) the minimum. Normal BP is around 120/90; above is considered hyperyensive and below is considered as hypotensive</string>
+    <string name="welcome_second_content1">What is BP and HR?</string>
+    <string name="welcome_second_content2">Blood Pressure (BP) and Heart Rate (HR) are the two most commonly used vital signs.</string>
     <string name="welcome_second_content3">
-        It is important to be aware of one\s BP; hypertension, often referred to as the \Silent Killer,\ is the most common cardiovascular disease in America.
-        It can be easily induced by various daily activities, such as caffeine or alcohol intake, stress, and consumption of salty foods.
-        However, keeping up with BP is not a easy thing to do for many people, especially for those living busy lives.
-        Furthermore, the reliability of the measurement made through irregular visits to hospitals is often compromised by the White Coat Effect.
-        Hence, constant and frequent monitoring with smartphones will change many people\s lives</string>
+        BP is the pressure exerted by the blood upon the walls of the blood vessels, indicated as SBP / DBP.</string>
+    <string name="welcome_second_content4">
+        Systolic BP (SBP) is the maximum BP when heart pushes the blood around the body, and Diastolic BP (DBP) is the minimum BP when heart rests between the beat.
+        Normal BP is around 120/90; above is considered hypertensive and below is considered as hypotensive</string>
+    <string name="welcome_second_content5">HR is the number of times your heart beats per minute. Normal resting HR ranges between 60 and 100.</string>
+    <string name="welcome_second_content6">Why is it so important to monitor your BP?</string>
+    <string name="welcome_second_content7">
+        Hypertension, often referred to as the \Silent Killer,\ is the most common cardiovascular disease in America.
+        It can be easily induced by various daily activities, such as caffeine or alcohol intake, stress, and consumption of salty foods.</string>
+    <string name="welcome_second_content8">
+        However, keeping up with BP is not easy for many people, especially for those living busy lives.
+        The reliability of the BP measurements at hospitals is often compromised by the White Coat Effect.
+        Hence, constant and frequent monitoring using smartphones will benefit many people\s lives</string>
 
     <!--Welcome: third RPP page-->
     <string name="welcome_third_header">Rate Pressure Product</string>
-    <string name="welcome_third_content1">
-        The importance of BP measurement is limited without personalized treatment to keep BP in a desirable range.
-        Not only for those suffering from hypertension, but also for normal people, exercising is one of the most effective ways to keep the BP in a health level and stay fit</string>
-    <string name="welcome_third_content2">
-        However, everyone has different cardio-capacity and it is often difficult to find the most optimal work-out routine.
-        Such concerns can be relieved with the Rate Pressure Product that can be measured from one\s smartphones at anywhere at anytime.
-         </string>
+    <string name="welcome_third_content1">Knowing BP is Not Enough</string>
+    <string name="welcome_third_content2">The impact of simple measurement is limited without personalized follow-up treatment.</string>
     <string name="welcome_third_content3">
-        Rate Pressure Product (RPP) = SBP X HR. Previously, there were attempts of measuring physical stress level only based on HR.
-        RPP, can provide more comprehensive info since BP and HR are combined
-    </string>
+        After all, the purpose of constant BP measurement implemented in smartphones is to provide more comprehensive health care at anywhere at anytime.
+        Moreover, the technology should not only help patients suffering from hypertension, but also benefit all people, those whose BP is currently in a normal range.</string>
+    <string name="welcome_third_content4">Why RPP?</string>
+    <string name="welcome_third_content5">Rate Pressure Product (RPP) is SBP X HR. </string>
+    <string name="welcome_third_content6">Traditionally, RPP is used as an index of myocardial O2 consumption, meaning it can measure the energy and O2 demand of heart.
+        Hence, it is a good indicator examining the cardiac function, especially when the energy demand is high.</string>
+    <string name="welcome_third_content7">
+        Like in many journals, RPP is calculated as (SBP X HR)/1000 in this app.
+        Such calculation minimizes the error range caused by not-entirely-accurate BP measurement, and also removes the need to show BP values directly.</string>
 
     <!--Welcome: fourth RPP Service page-->
     <string name="welcome_fourth_header">RPP and Exercise</string>
-    <string name="welcome_fourth_content1">RPP can be used to determine the exercise intensity and based on the recovery time it can be used to find a work out routine that is most efficient for each individual. </string>
-    <string name="welcome_fourth_content2">References and characteristics of each level...</string>
+    <string name="welcome_fourth_content1">Applying RPP</string>
+    <string name="welcome_fourth_content2">
+        Previously, there were attempts of measuring physical stress level only based on HR. However, without information about BP, measuring stress solely based on HR is clearly limited.
+        On the other hand,  RPP can effectively show the degree of physical stress and exercise intensity,
+        as studied in "The rate-pressure-product as a determinant of myocardial blood flow during dipyridamole stress in healthy, young volunteers" by Meter at al. and many other journals.</string>
+    <string name="welcome_fourth_content3">Personal Trainer on Every Smartphone</string>
+    <string name="welcome_fourth_content4">
+        Exercise is not only important for keeping BP in a desirable level, but also for living a fit and healthy life. Everyone has different cardio-capacity and it is often difficult to find the most optimal work-out routine.
+        Due to the properties stated previously, based on the RPP measured during the exercise and recovery, the values can be used to determine the exercise intensity.
+        Ultimately, it can be used to suggest different exercises to try out in the future. With time, the clients will be able to build up an optimal work-out routine.</string>
+    <string name="welcome_fourth_content5">How does it work?</string>
+    <string name="welcome_fourth_content6">
+        RPP during exercise can be divided into 4 levels; Normal (~12), Risk (13~17), Danger (18~21), and Very Danger (21~). If a client\s RPP is Normal, exercise of same or slightly higher intensity will be suggested.
+        If it is at Risk, exercise of the same or slightly lower intensity will be suggested. If RPP is considered to be Danger or Very Danger, exercise of lower intensity will be suggested.</string>
+    <string name="welcome_fourth_content7">
+        If the activity with RPP greater than 21 is continued more than 2 minutes, the app will have pop-up notification recommending the user to stop the current activity.</string>
 
     <!--Calibration Screen-->
     <string name="cal_header">User Calibration</string>
+    <string name="cal_Reference">Reference</string>
     <string name="cal_button">Calibrate</string>
     <string name="cal_button_done">Done</string>
 
