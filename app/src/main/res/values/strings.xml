@@ -92,7 +92,16 @@
     <string name="average_rpp"> </string>
     <string name="exercise_label">Exercise Intensity: </string>
     <string name="exercise"> </string>
-    <string name="exercise_suggestion">Please measure your RPP</string>
-    <string name="return_to_mearement_button">PREVIOUS</string>
+    <string name="suggestion_default">Please measure your RPP</string>
+    <string name="suggestion_normal">You can try out more demanding exercises</string>
+    <string name="suggestion_risk">You can try out exercises of same or less intensity</string>
+    <string name="suggestion_danger">You can try out exercises of same or less intensity</string>
+    <string name="suggestion_vdanger">Your workout may have put too much constraint on your heart. Try less intense exercises</string>
+    <string name="previous">Measure RPP</string>
+    <string name="more">MORE</string>
+
+    <!--Exercise Guide-->
+    <string name="aerobic">Aerobic/Cardio Exercises</string>
+    <string name="anaerobic">Anaerobic Exercises</string>
 
 </resources>
