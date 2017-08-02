@@ -110,6 +110,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp" />
 
+    <!--<com.jjoe64.graphview.GraphView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dip"-->
+        <!--android:layout_above="@id/cal_button"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginLeft="24dp"-->
+        <!--android:layout_marginRight="24dp"-->
+        <!--android:id="@+id/graph" />-->
     <!--<ProgressBar-->
         <!--android:id="@+id/progressBarCal"-->
         <!--style="?android:attr/progressBarStyleHorizontal"-->
