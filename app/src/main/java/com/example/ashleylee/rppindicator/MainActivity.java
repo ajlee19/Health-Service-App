@@ -1,7 +1,7 @@
 package  com.samsung.rpp_demo;
 
 import android.content.Intent;
-import android.graphics.Paint;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,16 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.samsung.sds.mhs.android.BPAlgorithm;
 import com.samsung.sds.mhs.android.BpEventListener;
-
 import java.util.ArrayList;
-
 import samsung.rpp_demo.R;
 
 public class MainActivity extends AppCompatActivity implements BpEventListener {
@@ -28,20 +26,18 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
     private BPAlgorithm bpAlgorithm;
     private int sbpOffset;
     private double mFeat1, mFeat2, mFeat3, mFeat4;
-
     private TextView hrText, rppText;
     private Button measureBtn;
-    private int aSbp;
-    private int rppMeasured;
+    private int aSbp, rppMeasured;
     private ArrayList<Integer> hrData, rppData;
     double[] features;
-
     private SensorManager sensorManager;
     private Sensor hrm;
-
     private GraphView graph;
     private LineGraphSeries<DataPoint> series;
     private double xVal = 0;
+    private int[] mColor = new int[8];
+//    private Runnable timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,22 +60,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         graph = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<DataPoint>();
         graph.addSeries(series);
-        graph.getGridLabelRenderer().setVerticalLabelsVisible(false); // remove vertical grid
-        // set vertical axis
-        Viewport viewport = graph.getViewport();
-        viewport.setYAxisBoundsManual(true);
-        viewport.setMinY(5);
-        viewport.setMaxY(25);
-        viewport.setScrollable(true);
-//        viewport.setXAxisBoundsManual(true);
-//        viewport.setMinY(0);
-//        viewport.setMaxY(xVal);
-//        viewport.scrollToEnd();
-        series.setThickness(8);
-        series.setDrawBackground(true);
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
+        graphSetting();
 
         bpAlgorithm = new BPAlgorithm(this);
         bpAlgorithm.setBpChangedListener(this);
@@ -96,11 +77,26 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
             measureBtn.setText("Measuring");
             hrText.setText("--");
             rppText.setText("--");
+
+            DataPoint[] points = new DataPoint[0];
+            series.resetData(points);
             hrData = new ArrayList<>();
             rppData = new ArrayList<>();
             bpAlgorithm.resetReq();
             turnOnSensor();
         }
+    }
+
+    public void viewRPPAnalysis(View view) {
+        int hrAvg = calculateAverage(hrData);
+        int rppAvg = calculateAverage(rppData);
+        turnOffSensor();
+        Intent intent = new Intent(this, ExerciseSuggestion.class);
+        intent.putExtra("hrAvg", hrAvg);
+        intent.putExtra("rppAvg", rppAvg);
+        intent.putExtra("features", features);
+        intent.putExtra("sbpOffset", sbpOffset);
+        startActivity(intent);
     }
 
     SensorEventListener sensorEventListener = new SensorEventListener() {
@@ -123,7 +119,15 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
         rppText.setText(String.valueOf(rppMeasured));
         hrText.setText(String.valueOf(hr));
-        series.appendData(new DataPoint(xVal++, rppMeasured), true, 1000);
+
+        boolean scroll;
+        if (xVal >100)
+            scroll =true;
+        else
+            scroll =false;
+
+        series.appendData(new DataPoint(xVal++, rppMeasured), scroll, 1000);
+        updateGraphColor(rppMeasured);
         hrData.add((int) hr);
         rppData.add(rppMeasured);
     }
@@ -134,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         mFeat2 = feat2;
         mFeat3 = feat3;
         mFeat4 = feat4;
-        //Log.d("test", String.format("Feat: %.4f, %.4f, %.4f, %.4f", mFeat1, mFeat2, mFeat3, mFeat4));
     }
 
     private void turnOnSensor(){
@@ -148,21 +151,60 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
     }
 
     private int calculateAverage(ArrayList<Integer> data){
+        if (data.isEmpty()){
+            return 0;
+        }
         int tot = 0;
-        for (Integer i: data){tot += i;}
+        for (Integer i: data) {
+            tot += i;
+        }
         return Math.round(tot/data.size());
     }
 
-    public void viewRPPAnalysis(View view) {
-        int hrAvg = calculateAverage(hrData);
-        int rppAvg = calculateAverage(rppData);
-        turnOffSensor();
-        Intent intent = new Intent(this, ExerciseSuggestion.class);
-        intent.putExtra("hrAvg", hrAvg);
-        intent.putExtra("rppAvg", rppAvg);
+    private void updateGraphColor(int rpp){
+        if (rpp <= 12){
+            series.setColor(mColor[0]);
+            series.setBackgroundColor(mColor[1]);
+        }else if (rpp <= 17){
+            series.setColor(mColor[2]);
+            series.setBackgroundColor(mColor[3]);
+        }else if (rpp <= 21){
+            series.setColor(mColor[4]);
+            series.setBackgroundColor(mColor[5]);
+        }else{
+            series.setColor(mColor[6]);
+            series.setBackgroundColor(mColor[7]);
+        }
+    }
 
-        intent.putExtra("features", features);
-        intent.putExtra("sbpOffset", sbpOffset);
-        startActivity(intent);
+    private void graphSetting(){
+        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL); //only horizontal grid
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        // area below the graph
+        series.setThickness(5);
+        series.setDrawBackground(true);
+
+        Viewport viewport = graph.getViewport();
+        // set y bound
+        viewport.setYAxisBoundsManual(true);
+        viewport.setMinY(5);
+        viewport.setMaxY(25);
+        // set x bound
+        viewport.setXAxisBoundsManual(true);
+        viewport.setMinX(0);
+        viewport.setMaxX(100);
+
+        viewport.setScrollable(true);
+//        viewport.setScalable(true);
+//        viewport.scrollToEnd();
+
+        mColor[0] = Color.rgb(178,255,89); //green line
+        mColor[1] = Color.rgb(204, 255, 144); //green background
+        mColor[2] = Color.rgb(255,241,118); //yellow
+        mColor[3] = Color.rgb(255, 249, 196); //yellow background
+        mColor[4] = Color.rgb(255, 167, 38); //orange
+        mColor[5] = Color.rgb(255, 224, 178); //orange background
+        mColor[6] = Color.rgb(239, 83, 80); //red
+        mColor[7] = Color.rgb(255, 205, 210); //red background
     }
 }
