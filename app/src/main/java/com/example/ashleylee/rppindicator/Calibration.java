@@ -26,11 +26,9 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
     private SensorManager sensorManager;
     private Sensor hrm;
     private static final int PERMISSION_REQUEST_CODE = 1;
-
     private Button calButton;
     private EditText sbpRef, dbpRef;
     private ProgressBar spinner;
-
     private BPAlgorithm bpAlgorithm;
     private double mFeat1, mFeat2, mFeat3, mFeat4;
     private int mSbpOffset, mDbpOffset;
@@ -123,7 +121,6 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
         mFeat2 = feat2;
         mFeat3 = feat3;
         mFeat4 = feat4;
-        //Log.d("test", String.format("Feat: %.4f, %.4f, %.4f, %.4f", mFeat1, mFeat2, mFeat3, mFeat4));
         turnOffSensor();
         spinner.setVisibility(View.GONE);
         calButton.setText("Done");
