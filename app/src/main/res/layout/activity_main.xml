@@ -124,4 +124,29 @@
         android:drawableStart="@drawable/ic_run"
         android:onClick="viewRPPAnalysis"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@id/graph"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/tracker_stress_status_bar_widget_gradient_wrapper">
+
+        </LinearLayout>
+
+        <!--<SeekBar-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:id="@+id/seek_bar" />-->
+
+    </FrameLayout>
+
+
 </RelativeLayout>
