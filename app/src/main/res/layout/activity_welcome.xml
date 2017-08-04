@@ -25,8 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:alpha=".5"
-        android:layout_above="@id/layoutDots"
-        android:background="@android:color/white" />
+        android:layout_above="@id/layoutDots" />
 
     <Button
         android:id="@+id/btn_skip"
@@ -36,8 +35,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="8dp"
         android:background="@null"
-        android:text="Skip"
-        android:textColor="@android:color/white" />
+        android:text="Skip" />
 
     <Button
         android:id="@+id/btn_measure"
@@ -48,7 +46,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
         android:background="@null"
-        android:text="Measure RPP"
-        android:textColor="@android:color/white" />
+        android:text="Measure RPP" />
 
 </RelativeLayout>
