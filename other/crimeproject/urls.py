@@ -17,15 +17,14 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import TagBlogIndexView
+from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.index, name='index'),
+    url(r'^base.html$', views.main, name='main'),
+    url(r'^_intro.html$', views.intro, name='intro'),
+    url(r'^_content.html$', views.content, name='content'),
+    url(r'^_contact.html$', views.contact, name='contact'),
     url(r'^visualizemap/', include('visualizemap.urls')),
-    url(r'^tags/(?P<tag>.*)/$', TagBlogIndexView.as_view(), name="blog_tagged_posts"),
-    url(r"", include("pinax.blog.urls", namespace="pinax_blog")),
-    url(r"", include("pinax.pages.urls")),
-    url(r"^ajax/images/", include("pinax.images.urls")),
-]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
