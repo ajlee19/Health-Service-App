@@ -17,6 +17,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
@@ -53,19 +54,19 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
     private int[] mColor = new int[8];
 
     private LinearLayout mGradientWrapper;
-    //private SeekBar barGauge;
+    private SeekBar barGauge;
     private static final int[][] GRADIENT_COLORS = {
             {0, R.color.tracker_stress_gradient_first
             }, {
-            16, R.color.tracker_stress_gradient_second
+            3, R.color.tracker_stress_gradient_second
     }, {
-            53, R.color.tracker_stress_gradient_third
+            5, R.color.tracker_stress_gradient_third
     }, {
-            77, R.color.tracker_stress_gradient_fourth
+            15, R.color.tracker_stress_gradient_fourth
     }, {
-            89, R.color.tracker_stress_gradient_fifth
+            19, R.color.tracker_stress_gradient_fifth
     }, {
-            100, R.color.tracker_stress_gradient_last
+            30, R.color.tracker_stress_gradient_last
     }
     };
 
@@ -93,14 +94,15 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         graphSetting();
 
         mGradientWrapper = (LinearLayout) findViewById(R.id.tracker_stress_status_bar_widget_gradient_wrapper);
+        mGradientWrapper.setVisibility(View.VISIBLE);
         int index = 0;
         while (index < GRADIENT_COLORS.length - 1) {
             createGradientRuler(mGradientWrapper, index);
             index++;
         }
-//        barGauge = (SeekBar) findViewById(R.id.seek_bar);
-//        barGauge.setMax(30);
-//        barGauge.setEnabled(false);
+        barGauge = (SeekBar) findViewById(R.id.seek_bar);
+        barGauge.setMax(30);
+        barGauge.setEnabled(false);
 
         bpAlgorithm = new BPAlgorithm(this);
         bpAlgorithm.setBpChangedListener(this);
@@ -170,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
         series.appendData(new DataPoint(xVal++, rppMeasured), scroll, 1000);
         updateGraphColor(rppMeasured);
-//        barGauge.setProgress(rppMeasured);
+        barGauge.setProgress(rppMeasured);
         hrData.add((int) hr);
         rppData.add(rppMeasured);
     }
