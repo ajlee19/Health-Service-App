@@ -1,6 +1,5 @@
 from django.contrib.sites.models import Site
 
-
 def settings(request):
     ctx = {}
     if Site._meta.installed:
@@ -10,3 +9,4 @@ def settings(request):
             "SITE_DOMAIN": site.domain
         })
     return ctx
+
