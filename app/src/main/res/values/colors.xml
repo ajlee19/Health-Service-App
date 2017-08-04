@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#FFFFFF</color>
-    <color name="primary">#607D8B</color>
-    <color name="primary_dark">#455A64</color>
-    <color name="primary_light">#CFD8DC</color>
+    <color name="primary">#A31F34</color>
+    <color name="primary_dark">#931b2e</color>
+    <color name="primary_light">#d2e0e7</color>
     <color name="accent">#FF5252</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
@@ -11,13 +11,15 @@
     <color name="divider">#BDBDBD</color>
     <color name="green">#B2FF59</color>
 
-    <color name="tracker_stress_gradient_first">#4db6ac</color>
-    <color name="tracker_stress_gradient_second">#02c28e</color>
-    <color name="tracker_stress_gradient_third">#79dc48</color>
-    <color name="tracker_stress_gradient_fourth">#fbc02d</color>
-    <color name="tracker_stress_gradient_fifth">#fe9915</color>
-    <color name="tracker_stress_gradient_last">#f35e2f</color>
+    <color name="tracker_stress_gradient_first">#9cdfd9</color>
+    <color name="tracker_stress_gradient_second">#9fdab2</color>
+    <color name="tracker_stress_gradient_third">#9cf481</color>
+    <color name="tracker_stress_gradient_fourth">#f4e05f</color>
+    <color name="tracker_stress_gradient_fifth">#fcbe44</color>
+    <color name="tracker_stress_gradient_last">#f15a3c</color>
 
     <color name="dot_active">#d1395c</color>
     <color name="dot_inactive">#f98da5</color>
 </resources>
+<!--<color name="primary">#607D8B</color>-->
+<!--<color name="primary_dark">#455A64</color>-->
