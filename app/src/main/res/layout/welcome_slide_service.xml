@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primary">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/welcome_fourth_header"
@@ -11,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:textSize="32sp"
-        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:gravity="center_horizontal"/>
 
@@ -37,8 +35,7 @@
                 android:text="@string/welcome_fourth_content1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textColor="@android:color/white"/>
+                android:textSize="24sp" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_fourth_content2"
@@ -47,8 +44,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"/>
+                android:textSize="16sp" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_fourth_content3"
@@ -57,8 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/welcome_fourth_content2"
-                android:layout_marginTop="40dp"
-                android:textColor="@android:color/white"/>
+                android:layout_marginTop="40dp" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_fourth_content4"
@@ -67,8 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/welcome_fourth_content3"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/white"/>
+                android:layout_marginTop="16dp"/>
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_fourth_content5"
@@ -77,8 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/welcome_fourth_content4"
-                android:layout_marginTop="40dp"
-                android:textColor="@android:color/white"/>
+                android:layout_marginTop="40dp" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_fourth_content6"
@@ -87,8 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/welcome_fourth_content5"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/white"/>
+                android:layout_marginTop="16dp" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_fourth_content7"
@@ -97,8 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/welcome_fourth_content6"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/white"/>
+                android:layout_marginTop="16dp" />
         </LinearLayout>
 
     </ScrollView>
