@@ -1,9 +1,22 @@
-from pinax.blog.views import BlogIndexView
+from django.http import HttpResponse
+from django.template import Context, Template, loader
 
+def index(request):
+    template = loader.get_template('base.html')
+    return HttpResponse(template.render())
 
-class TagBlogIndexView(BlogIndexView):
+def intro(request):
+    template = loader.get_template('_intro.html')
+    return HttpResponse(template.render())
 
-    def get_queryset(self):
-        queryset = super(TagBlogIndexView, self).get_queryset()
-        queryset = queryset.filter(tags__name__in=[self.kwargs.get("tag")])
-        return queryset
+def content(request):
+    template = loader.get_template('_content.html')
+    return HttpResponse(template.render())
+
+def contact(request):
+    template = loader.get_template('_contact.html')
+    return HttpResponse(template.render())
+
+def main(request):
+    template = loader.get_template('base.html')
+    return HttpResponse(template.render())
