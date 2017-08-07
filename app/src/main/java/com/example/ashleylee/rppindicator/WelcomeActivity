@@ -28,21 +28,20 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // COMMENTED OUT FOR NOT
+        // COMMENTED OUT FOR NOW
 //        // Checking for first time launch -- if not first time, go directly to main screen
 //        prefManager = new PrefManager(this);
 //        if (!prefManager.isFirstTimeLaunch()) {
 //            launchHomeScreen();
 //            finish();
 //        }
-
         setContentView(R.layout.activity_welcome);
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnMeasure = (Button) findViewById(R.id.btn_measure);
+        btnMeasure.setVisibility(View.GONE);
 
         // layouts of welcome slides
         layouts = new int[]{R.layout.welcome_slide_about, R.layout.welcome_slide_basics, R.layout.welcome_slide_rpp, R.layout.welcome_slide_service};
