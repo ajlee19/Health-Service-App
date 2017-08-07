@@ -25,8 +25,6 @@ public class ExerciseSuggestion extends AppCompatActivity {
         Intent intent = getIntent();
         hrAvg = intent.getIntExtra("hrAvg",0);
         rppAvg = intent.getIntExtra("rppAvg",0);
-        sbpOffset = intent.getIntExtra("sbpOffset",0);
-        features = intent.getDoubleArrayExtra("features");
         suggestAeroHeader = (TextView) findViewById(R.id.suggest_ah);
         suggestAero = (WebView) findViewById(R.id.suggest_at);
         suggestAnAeroHeader = (TextView) findViewById(R.id.suggest_anh);
@@ -53,15 +51,11 @@ public class ExerciseSuggestion extends AppCompatActivity {
     /** Back to Main */
     public void toPrevious(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("features", features);
-        intent.putExtra("sbpOffset", sbpOffset);
         startActivity(intent);
     }
 
     public void toMore(View view) {
         Intent intent = new Intent(this, Additional.class);
-        intent.putExtra("features", features);
-        intent.putExtra("sbpOffset", sbpOffset);
         startActivity(intent);
     }
 
