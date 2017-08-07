@@ -1,7 +1,9 @@
 package  com.samsung.rpp_demo;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -13,12 +15,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.samsung.sds.mhs.android.BPAlgorithm;
 import com.samsung.sds.mhs.android.BpEventListener;
+
 import samsung.rpp_demo.R;
 
 public class Calibration extends AppCompatActivity implements BpEventListener {
@@ -26,21 +31,36 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
     private SensorManager sensorManager;
     private Sensor hrm;
     private static final int PERMISSION_REQUEST_CODE = 1;
-    private Button calButton;
-    private EditText sbpRef, dbpRef;
-    private ProgressBar spinner;
     private BPAlgorithm bpAlgorithm;
     private double mFeat1, mFeat2, mFeat3, mFeat4;
     private int mSbpOffset, mDbpOffset;
+    private Button calButton;
+    private EditText sbpRef, dbpRef, nameRef;
+    private String name;
+    private ProgressBar spinner;
+    SharedPreferences sharedpreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        sharedpreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
+        editor.putString("Name", "User");
+        editor.putInt("SBPOffset", 0);
+        editor.putString("feat1", "0");
+        editor.putString("feat2","0");
+        editor.putString("feat3", "0");
+        editor.putString("feat4", "0");
+        editor.commit();
 
         calButton = (Button) findViewById(R.id.cal_button);
         sbpRef = (EditText) findViewById(R.id.sbp_input);
         dbpRef = (EditText) findViewById(R.id.dbp_input);
+        nameRef = (EditText) findViewById(R.id.name_input);
 
         // Checking permission
         if (checkPermission()){
@@ -65,7 +85,6 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
             switch (event.sensor.getType()) {
                 case 65584:
                     bpAlgorithm.pushData((int)event.values[2]);
-                    //Log.d("test","value : "+ event.values[2]);
                     break;
             }
         }
@@ -86,16 +105,30 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
     }
 
     public void continueToMain(){
+        SharedPreferences pref = getSharedPreferences(nameRef.getText().toString(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefEdit = pref.edit();
+        prefEdit.putInt("SBPOffset", mDbpOffset);
+        prefEdit.putString("feat1", String.valueOf(mFeat1));
+        prefEdit.putString("feat2", String.valueOf(mFeat2));
+        prefEdit.putString("feat3", String.valueOf(mFeat3));
+        prefEdit.putString("feat4", String.valueOf(mFeat4));
+        prefEdit.commit();
+
         Toast.makeText(Calibration.this, "Offset: "+mSbpOffset+"/"+mDbpOffset, Toast.LENGTH_LONG).show();
-        double[] features = new double[4];
-        features[0] = mFeat1;
-        features[1] = mFeat2;
-        features[2] = mFeat3;
-        features[3] = mFeat4;
+//        double[] features = new double[4];
+//        features[0] = mFeat1;
+//        features[1] = mFeat2;
+//        features[2] = mFeat3;
+//        features[3] = mFeat4;
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("sbpOffset", mSbpOffset);
-        intent.putExtra("dbpOffset", mDbpOffset);
-        intent.putExtra("features", features);
+//        intent.putExtra("sbpOffset", mSbpOffset);
+//        intent.putExtra("dbpOffset", mDbpOffset);
+//        intent.putExtra("features", features);
+        startActivity(intent);
+    }
+
+    public void skipToMain(){
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
