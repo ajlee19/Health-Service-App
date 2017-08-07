@@ -110,6 +110,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp" />
 
+    <Button
+        android:id="@+id/skpcalbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sbp_input"
+        android:layout_alignStart="@id/sbp_input"
+        android:layout_marginTop="16dp"
+        android:text="Skip Calibration"
+        android:onClick="skipToMain"/>
+
     <!--<com.jjoe64.graphview.GraphView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="200dip"-->
