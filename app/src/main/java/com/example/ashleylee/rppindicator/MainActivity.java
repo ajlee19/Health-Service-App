@@ -2,6 +2,7 @@ package  com.samsung.rpp_demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -15,6 +16,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -40,10 +44,10 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
     private TextView hrText, rppText;
     private Button measureBtn;
+    private Animation anim, animOff;
 
     private int aSbp, rppMeasured;
     private ArrayList<Integer> hrData, rppData;
-    double[] features;
 
     private SensorManager sensorManager;
     private Sensor hrm;
@@ -74,10 +78,14 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        Intent intent = getIntent();
-        sbpOffset = intent.getIntExtra("sbpOffset", 0);
-        features = intent.getDoubleArrayExtra("features");
+        SharedPreferences prefs = this.getSharedPreferences("title",Context.MODE_PRIVATE);
+        sbpOffset = getSharedPreferences("default", Context.MODE_PRIVATE).getInt("SBPOffset", 0);
+        mFeat1 = Double.parseDouble(getSharedPreferences("default", Context.MODE_PRIVATE).getString("feat1", "0"));
+        mFeat2 = Double.parseDouble(getSharedPreferences("default", Context.MODE_PRIVATE).getString("feat2", "0"));
+        mFeat3 = Double.parseDouble(getSharedPreferences("default", Context.MODE_PRIVATE).getString("feat3", "0"));
+        mFeat4 = Double.parseDouble(getSharedPreferences("default", Context.MODE_PRIVATE).getString("feat4", "0"));
 
         hrText = (TextView) findViewById(R.id.heart_rate);
         rppText = (TextView) findViewById(R.id.rpp);
@@ -100,30 +108,32 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
             createGradientRuler(mGradientWrapper, index);
             index++;
         }
+
         barGauge = (SeekBar) findViewById(R.id.seek_bar);
         barGauge.setMax(30);
         barGauge.setEnabled(false);
 
         bpAlgorithm = new BPAlgorithm(this);
         bpAlgorithm.setBpChangedListener(this);
-        bpAlgorithm.setFeature(features[0], features[1], features[2], features[3]);
+        bpAlgorithm.setFeature(mFeat1, mFeat2, mFeat3, mFeat4);
+
+        animOff = new AlphaAnimation(1.0f, 1.0f);
+        animOff.setDuration(50); //You can manage the blinking time with this parameter
+        animOff.setStartOffset(20);
+        animOff.setRepeatMode(Animation.REVERSE);
+        animOff.setRepeatCount(Animation.INFINITE);
+
+        anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(300); //You can manage the blinking time with this parameter
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
     }
 
     public void measureRpp(View view) {
-        if (measureBtn.getText().toString().equals("Measuring")) {
+        if (measureBtn.getText().toString().equals("Press to Stop")) {
             turnOffSensor();
-            measureBtn.setText("Measure RPP");
-            hrText.setText("");
-            rppText.setText("");
         } else {
-            measureBtn.setText("Measuring");
-            hrText.setText("--");
-            rppText.setText("--");
-
-            DataPoint[] points = new DataPoint[0];
-            series.resetData(points);
-            hrData = new ArrayList<>();
-            rppData = new ArrayList<>();
             bpAlgorithm.resetReq();
             turnOnSensor();
         }
@@ -136,8 +146,6 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         Intent intent = new Intent(this, ExerciseSuggestion.class);
         intent.putExtra("hrAvg", hrAvg);
         intent.putExtra("rppAvg", rppAvg);
-        intent.putExtra("features", features);
-        intent.putExtra("sbpOffset", sbpOffset);
         startActivity(intent);
     }
 
@@ -186,12 +194,22 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
     }
 
     private void turnOnSensor() {
+        measureBtn.setText("Press to Stop");
+        measureBtn.startAnimation(anim);
+        hrText.setText("--");
+        rppText.setText("--");
+        DataPoint[] points = new DataPoint[0];
+        series.resetData(points);
+        hrData = new ArrayList<>();
+        rppData = new ArrayList<>();
         sensorManager.registerListener(sensorEventListener, hrm, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     private void turnOffSensor() {
         if (sensorManager != null) {
             sensorManager.unregisterListener(sensorEventListener);
+            measureBtn.startAnimation(animOff);
+            measureBtn.setText("Measure RPP");
         }
     }
 
@@ -224,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
     private void graphSetting() {
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL); //only horizontal grid
-        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(true);
         // area below the graph
         series.setThickness(5);
         series.setDrawBackground(true);
@@ -240,6 +258,9 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         viewport.setMaxX(100);
 
         viewport.setScrollable(true);
+        viewport.setScalableY(true);
+        //viewport.setScalable(true);
+        viewport.setScalableY(true);
 
         mColor[0] = Color.rgb(178, 255, 89); //green line
         mColor[1] = Color.rgb(204, 255, 144); //green background
@@ -284,15 +305,15 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         layout.setBackground(drawable);
     }
 
-    public static float convertDpToPx(Context context, int dp) {
+    private static float convertDpToPx(Context context, int dp) {
         return convertDpToPx(context.getResources(), dp);
     }
 
-    public static float convertDpToPx(Resources resources, int dp) {
+    private static float convertDpToPx(Resources resources, int dp) {
         return convertDpToPx(resources.getDisplayMetrics(), dp);
     }
 
-    public static float convertDpToPx(DisplayMetrics displayMetrics, int dp) {
+    private static float convertDpToPx(DisplayMetrics displayMetrics, int dp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
     }
 
@@ -324,6 +345,5 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         }
         return result;
     }
-
 
 }
