@@ -40,7 +40,19 @@ public class WelcomeActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchMain();
+            }
+        });
         btnMeasure = (Button) findViewById(R.id.btn_measure);
+        btnMeasure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchMain();
+            }
+        });
         btnMeasure.setVisibility(View.GONE);
 
         // layouts of welcome slides
@@ -52,34 +64,12 @@ public class WelcomeActivity extends AppCompatActivity {
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-
-        // skip button --> jump to main page
-        btnSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchHomeScreen();
-            }
-        });
-
-        // measure button at the end --> jump to main page
-        btnMeasure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // if last page home screen will be launched
-                int current = getItem(+1);
-                if (current < layouts.length) {
-                    // move to next screen
-                    viewPager.setCurrentItem(current);
-                } else {
-                    launchHomeScreen();
-                }
-            }
-        });
     }
 
-    private void launchHomeScreen() {
-        // prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, Calibration.class));
+
+    public void launchMain() {
+        Intent intent = new Intent(this, Calibration.class);
+        startActivity(intent);
     }
 
     /**
