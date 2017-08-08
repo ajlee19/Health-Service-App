@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -80,12 +81,17 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        SharedPreferences prefs = this.getSharedPreferences("title",Context.MODE_PRIVATE);
-        sbpOffset = getSharedPreferences("default", Context.MODE_PRIVATE).getInt("SBPOffset", 0);
-        mFeat1 = Double.parseDouble(getSharedPreferences("default", Context.MODE_PRIVATE).getString("feat1", "0"));
-        mFeat2 = Double.parseDouble(getSharedPreferences("default", Context.MODE_PRIVATE).getString("feat2", "0"));
-        mFeat3 = Double.parseDouble(getSharedPreferences("default", Context.MODE_PRIVATE).getString("feat3", "0"));
-        mFeat4 = Double.parseDouble(getSharedPreferences("default", Context.MODE_PRIVATE).getString("feat4", "0"));
+        SharedPreferences prefs = getSharedPreferences("user", Context.MODE_PRIVATE);
+        sbpOffset = prefs.getInt("SBPOffset", 0);
+        mFeat1 = Double.parseDouble(prefs.getString("feat1", "0"));
+        mFeat2 = Double.parseDouble(prefs.getString("feat2", "0"));
+        mFeat3 = Double.parseDouble(prefs.getString("feat3", "0"));
+        mFeat4 = Double.parseDouble(prefs.getString("feat4", "0"));
+        Toast.makeText(MainActivity.this, "Name"+ prefs.getString("Name", "default")+"Offset: "+sbpOffset+"mFeat: "+prefs.getString("feat1", "0")+prefs.getString("feat2", "0"), Toast.LENGTH_LONG).show();
+
+        bpAlgorithm = new BPAlgorithm(this);
+        bpAlgorithm.setBpChangedListener(this);
+        bpAlgorithm.setFeature(mFeat1, mFeat2, mFeat3, mFeat4);
 
         hrText = (TextView) findViewById(R.id.heart_rate);
         rppText = (TextView) findViewById(R.id.rpp);
@@ -113,10 +119,6 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         barGauge.setMax(30);
         barGauge.setEnabled(false);
 
-        bpAlgorithm = new BPAlgorithm(this);
-        bpAlgorithm.setBpChangedListener(this);
-        bpAlgorithm.setFeature(mFeat1, mFeat2, mFeat3, mFeat4);
-
         animOff = new AlphaAnimation(1.0f, 1.0f);
         animOff.setDuration(50); //You can manage the blinking time with this parameter
         animOff.setStartOffset(20);
@@ -143,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         int hrAvg = calculateAverage(hrData);
         int rppAvg = calculateAverage(rppData);
         turnOffSensor();
+
         Intent intent = new Intent(this, ExerciseSuggestion.class);
         intent.putExtra("hrAvg", hrAvg);
         intent.putExtra("rppAvg", rppAvg);
@@ -195,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
     private void turnOnSensor() {
         measureBtn.setText("Press to Stop");
+
         measureBtn.startAnimation(anim);
         hrText.setText("--");
         rppText.setText("--");
