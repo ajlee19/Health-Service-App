@@ -1,5 +1,5 @@
-# RPP_App
-RPP Indication App
+# Health Service App
 
-Provides background information of HBP, HR, and RPP. Provide possible services using RPP
+App indicating vital signs
+
 
