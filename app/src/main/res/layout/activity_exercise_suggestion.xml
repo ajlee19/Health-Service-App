@@ -8,11 +8,11 @@
     <!--TITLE-->
     <TextView
         android:id="@+id/page_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/exercise_page_title"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp" />
@@ -23,17 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:scaleType="center"
         android:layout_below="@id/page_label"
+        android:scaleType="center"
         android:src="@drawable/divider" />
 
     <!--HR-->
     <ImageView
         android:id="@+id/heart_rate_icon"
+        app:srcCompat="@drawable/ic_heart"
         android:contentDescription="@string/heart_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_heart"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_below="@id/divider"
@@ -41,14 +41,14 @@
     <TextView
         android:id="@+id/heart_rate_label"
         android:text="@string/average_heart_rate_label"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/heart_rate_icon"
         android:layout_toRightOf="@id/heart_rate_icon"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_alignTop="@id/heart_rate_icon"
-        android:textSize="16sp" />
+        android:layout_alignTop="@id/heart_rate_icon" />
     <TextView
         android:text="@string/average_heart_rate"
         android:layout_width="wrap_content"
@@ -63,61 +63,61 @@
 
     <!--RPP-->
     <ImageView
-        android:contentDescription="@string/rpp_icon"
+        android:id="@+id/cc_icon"
+        android:contentDescription="@string/cc_icon"
+        app:srcCompat="@drawable/ic_pulse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_pulse"
         android:layout_alignStart="@id/heart_rate_icon"
         android:layout_alignLeft="@id/heart_rate_icon"
-        android:id="@+id/rpp_icon"
         android:layout_below="@id/heart_rate_icon"
         android:layout_marginTop="8dp" />
     <TextView
-        android:id="@+id/rpp_label"
-        android:text="@string/average_rpp_label"
+        android:id="@+id/cc_label"
+        android:text="@string/average_cc_label"
+        android:textSize="16sp"
         android:layout_alignStart="@id/heart_rate_label"
         android:layout_alignLeft="@id/heart_rate_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/rpp_icon"
-        android:textSize="16sp" />
+        android:layout_alignTop="@id/cc_icon" />
     <TextView
-        android:text="@string/average_rpp"
+        android:text="@string/average_cc"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_alignBaseline="@id/rpp_label"
-        android:layout_toRightOf="@id/rpp_label"
-        android:layout_toEndOf="@id/rpp_label"
+        android:layout_alignBaseline="@id/cc_label"
+        android:layout_toRightOf="@id/cc_label"
+        android:layout_toEndOf="@id/cc_label"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:id="@+id/avg_rpp" />
+        android:id="@+id/avg_cc" />
 
     <!--EXERCISE-->
     <ImageView
         android:contentDescription="@string/exercise_icon"
+        app:srcCompat="@drawable/ic_run"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_run"
         android:layout_alignStart="@id/heart_rate_icon"
         android:layout_alignLeft="@id/heart_rate_icon"
-        android:layout_below="@id/rpp_icon"
+        android:layout_below="@id/cc_icon"
         android:layout_marginTop="8dp"
         android:id="@+id/exercise_icon"/>
     <TextView
         android:text="@string/exercise_label"
+        android:textSize="16sp"
         android:id="@+id/exercise_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/rpp_label"
-        android:layout_alignStart="@id/rpp_label"
-        android:layout_alignTop="@id/exercise_icon"
-        android:textSize="16sp" />
+        android:layout_alignLeft="@id/cc_label"
+        android:layout_alignStart="@id/cc_label"
+        android:layout_alignTop="@id/exercise_icon" />
     <TextView
         android:text="@string/exercise"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
         android:layout_alignBaseline="@id/exercise_label"
         android:layout_toRightOf="@id/exercise_label"
         android:layout_toEndOf="@id/exercise_label"
@@ -154,20 +154,20 @@
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/suggestion_sum"
                 android:text="@string/suggestion_default"
+                android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/divider2"
-                android:layout_marginTop="16dp"
-                android:textSize="16sp"/>
+                android:layout_marginTop="16dp" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/suggest_ah"
                 android:text="@string/aerobic"
+                android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/suggestion_sum"
-                android:layout_marginTop="24dp"
-                android:textSize="24sp"/>
+                android:layout_marginTop="24dp" />
 
             <WebView
                 android:layout_width="match_parent"
