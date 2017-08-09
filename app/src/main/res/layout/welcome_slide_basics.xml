@@ -6,11 +6,11 @@
     <TextView
         android:id="@+id/welcome_second_header"
         android:text="@string/welcome_second_header"
+        android:textSize="32sp"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:textSize="32sp"
-        android:textStyle="bold"
         android:gravity="center_horizontal"/>
 
     <ScrollView
@@ -33,18 +33,18 @@
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_second_content1"
                 android:text="@string/welcome_second_content1"
+                android:textSize="24sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp" />
+                android:layout_height="wrap_content" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_second_content2"
                 android:text="@string/welcome_second_content2"
+                android:textSize="16sp"
                 android:layout_below="@id/welcome_second_content1"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/welcome_second_content3"
