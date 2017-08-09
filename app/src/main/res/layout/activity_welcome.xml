@@ -45,7 +45,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
         android:background="@null"
-        android:text="Measure RPP"
+        android:text="Measure CC"
         android:onClick="launchMain"/>
 
 </RelativeLayout>
