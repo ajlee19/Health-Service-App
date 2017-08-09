@@ -20,10 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.samsung.sds.mhs.android.BPAlgorithm;
 import com.samsung.sds.mhs.android.BpEventListener;
-
 import samsung.rpp_demo.R;
 
 public class Calibration extends AppCompatActivity implements BpEventListener {
@@ -36,7 +34,7 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
     private double mFeat1, mFeat2, mFeat3, mFeat4;
     private int mSbpOffset, mDbpOffset;
 
-    private Button calButton;
+    private Button calButton, skipBtm;
     private EditText sbpRef, dbpRef, nameRef;
     private ProgressBar spinner;
 
@@ -49,17 +47,20 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
         setContentView(R.layout.activity_calibration);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        calButton = (Button) findViewById(R.id.cal_button);
         sbpRef = (EditText) findViewById(R.id.sbp_input);
         dbpRef = (EditText) findViewById(R.id.dbp_input);
         nameRef = (EditText) findViewById(R.id.name_input);
-        Button skipBtm =(Button) findViewById(R.id.skpcalbtn);
+        calButton = (Button) findViewById(R.id.cal_button);
+        skipBtm =(Button) findViewById(R.id.skpcalbtn);
         skipBtm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 skipToMain();
             }
         });
+
+        prefs = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        prefEdit = prefs.edit();
 
         // Checking permission
         if (checkPermission()){
@@ -95,15 +96,6 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
         if (calButton.getText().toString().equals("Done")){
             continueToMain();
         } else {
-            prefs = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-            prefEdit = prefs.edit();
-            prefEdit.putString("Name", "User");
-            prefEdit.putInt("SBPOffset", 0);
-            prefEdit.putString("feat1", "0");
-            prefEdit.putString("feat2","0");
-            prefEdit.putString("feat3", "0");
-            prefEdit.putString("feat4", "0");
-            prefEdit.commit();
             spinner.setVisibility(View.VISIBLE);
             calButton.setText("Calibrating");
             bpAlgorithm.resetFeature();
@@ -123,18 +115,18 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
 
         Toast.makeText(Calibration.this, "Offset: "+mSbpOffset+"/"+mDbpOffset, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, MainActivity.class);
-//        double[] features = new double[4];
-//        features[0] = mFeat1;
-//        features[1] = mFeat2;
-//        features[2] = mFeat3;
-//        features[3] = mFeat4;
-//        intent.putExtra("sbpOffset", mSbpOffset);
-//        intent.putExtra("dbpOffset", mDbpOffset);
-//        intent.putExtra("features", features);
         startActivity(intent);
     }
 
     public void skipToMain(){
+        turnOffSensor();
+        prefEdit.putString("Name", "User");
+        prefEdit.putInt("SBPOffset", 0);
+        prefEdit.putString("feat1", "0");
+        prefEdit.putString("feat2","0");
+        prefEdit.putString("feat3", "0");
+        prefEdit.putString("feat4", "0");
+        prefEdit.commit();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
