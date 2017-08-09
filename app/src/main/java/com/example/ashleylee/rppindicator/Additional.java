@@ -7,9 +7,6 @@ import samsung.rpp_demo.R;
 
 public class Additional extends AppCompatActivity {
 
-    private int sbpOffset;
-    private double[] features;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
