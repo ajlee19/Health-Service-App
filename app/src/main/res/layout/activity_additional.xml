@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/add_title"
-        android:text="Something More"
+        android:text="@string/additional_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -22,8 +22,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="56dp"
-        >
+        android:layout_marginBottom="56dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,48 +31,49 @@
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/text_head1"
-                android:text="Combining RPP and VO2 Max"
+                android:text="@string/additional_texthead1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24sp" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/text_body1"
-                android:text="More information about intensity..."
+                android:text="@string/additional_textbody1"
+                android:textSize="16sp"
                 android:layout_below="@id/text_head1"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/text_head2"
-                android:text="More than simple feedback"
+                android:text="@string/additional_texthead2"
+                android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_body1"
-                android:layout_marginTop="32dp"
-                android:textSize="24sp" />
+                android:layout_marginTop="32dp" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/text_body2"
-                android:text="With more training data...taking into consideration what the user has been doing...design a full routine"
+                android:text="@string/additional_textbody21"
+                android:textSize="16sp"
                 android:layout_below="@id/text_head2"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content" />
 
             <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/text_body3"
-                android:text="Customize based on goal (lowing weight, building muscle, work on specific part, etc.)..."
+                android:text="@string/additional_textbody22"
+                android:textSize="16sp"
                 android:layout_below="@id/text_body2"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>
