@@ -8,11 +8,11 @@
     <!--TITLE-->
     <TextView
         android:id="@+id/page_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/main_page_title"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp" />
@@ -22,9 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:scaleType="center"
         android:layout_below="@id/page_label"
-        android:src="@drawable/divider" />
+        android:src="@drawable/divider"
+        android:scaleType="center"/>
 
     <Button
         android:id="@+id/measure_button"
@@ -52,19 +52,19 @@
     <TextView
         android:id="@+id/heart_rate_label"
         android:text="@string/heart_rate_label"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/heart_rate_icon"
         android:layout_toRightOf="@id/heart_rate_icon"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_alignTop="@id/heart_rate_icon"
-        android:textSize="16sp" />
+        android:layout_alignTop="@id/heart_rate_icon" />
     <TextView
         android:text="@string/heart_rate"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
         android:layout_alignBaseline="@id/heart_rate_label"
         android:layout_toRightOf="@id/heart_rate_label"
         android:layout_toEndOf="@id/heart_rate_label"
@@ -75,28 +75,28 @@
     <!--RPP-->
     <ImageView
         android:id="@+id/rpp_icon"
-        android:contentDescription="@string/rpp_icon"
+        android:contentDescription="@string/cc_icon"
+        app:srcCompat="@drawable/ic_pulse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_pulse"
         android:layout_alignStart="@id/heart_rate_icon"
         android:layout_alignLeft="@id/heart_rate_icon"
         android:layout_below="@id/heart_rate_icon"
         android:layout_marginTop="8dp" />
     <TextView
         android:id="@+id/rpp_label"
-        android:text="@string/rpp_label"
+        android:text="@string/cc_label"
+        android:textSize="16sp"
         android:layout_alignStart="@id/heart_rate_label"
         android:layout_alignLeft="@id/heart_rate_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/rpp_icon"
-        android:textSize="16sp" />
+        android:layout_alignTop="@id/rpp_icon" />
     <TextView
-        android:text="@string/rpp"
+        android:text="@string/cc"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
         android:layout_alignBaseline="@id/rpp_label"
         android:layout_toRightOf="@id/rpp_label"
         android:layout_toEndOf="@id/rpp_label"
@@ -117,15 +117,15 @@
 
     <Button
         android:id="@+id/main_button"
+        android:text="@string/cc_result_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rpp_result_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
         android:drawableLeft="@drawable/ic_run"
         android:drawableStart="@drawable/ic_run"
-        android:onClick="viewRPPAnalysis"/>
+        android:onClick="viewCCAnalysis"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -147,8 +147,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
-            android:thumb="@drawable/thumb_drawable"
             android:progressDrawable="@android:color/transparent"
+            android:thumb="@drawable/thumb_drawable"
             android:id="@+id/seek_bar" />
     </FrameLayout>
 
