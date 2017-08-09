@@ -7,14 +7,12 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
-
 import samsung.rpp_demo.R;
 
 public class ExerciseSuggestion extends AppCompatActivity {
 
-    private int hrAvg, rppAvg, sbpOffset;
-    private double[] features;
-    private TextView hrText, rppText, exText, suggestText, suggestAeroHeader, suggestAnAeroHeader;
+    private int hrAvg, ccAvg;
+    private TextView hrText, ccText, exText, suggestText, suggestAeroHeader, suggestAnAeroHeader;
     private WebView suggestAero, suggestAnAero;
 
     @Override
@@ -24,31 +22,29 @@ public class ExerciseSuggestion extends AppCompatActivity {
 
         Intent intent = getIntent();
         hrAvg = intent.getIntExtra("hrAvg",0);
-        rppAvg = intent.getIntExtra("rppAvg",0);
-        suggestAeroHeader = (TextView) findViewById(R.id.suggest_ah);
-        suggestAero = (WebView) findViewById(R.id.suggest_at);
-        suggestAnAeroHeader = (TextView) findViewById(R.id.suggest_anh);
-        suggestAnAero = (WebView) findViewById(R.id.suggest_ant);
+        ccAvg = intent.getIntExtra("ccAvg",0);
 
-        // Enable Javascript
+        suggestAeroHeader = (TextView) findViewById(R.id.suggest_ah);
+        suggestAeroHeader.setVisibility(View.GONE);
+        suggestAero = (WebView) findViewById(R.id.suggest_at);
         suggestAero.loadUrl("file:///android_asset/basic.html");
         WebSettings webSettings1 = suggestAero.getSettings();
         webSettings1.setJavaScriptEnabled(true);
+        suggestAero.setVisibility(View.GONE);
+
+        suggestAnAeroHeader = (TextView) findViewById(R.id.suggest_anh);
+        suggestAnAeroHeader.setVisibility(View.GONE);
+        suggestAnAero = (WebView) findViewById(R.id.suggest_ant);
         suggestAnAero.loadUrl("file:///android_asset/basic.html");
         WebSettings webSettings2 = suggestAnAero.getSettings();
         webSettings2.setJavaScriptEnabled(true);
-
-        suggestAeroHeader.setVisibility(View.GONE);
-        suggestAero.setVisibility(View.GONE);
-        suggestAnAeroHeader.setVisibility(View.GONE);
         suggestAnAero.setVisibility(View.GONE);
 
-        if (hrAvg > 0 && rppAvg > 0){
-            setText(hrAvg, rppAvg);
+        if (hrAvg > 0 && ccAvg > 0){
+            setText(hrAvg, ccAvg);
         }
     }
 
-    /** Back to Main */
     public void toPrevious(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -59,9 +55,9 @@ public class ExerciseSuggestion extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setText(int hrAvg, int rppAvg){
+    private void setText(int hrAvg, int ccAvg){
         hrText = (TextView) findViewById(R.id.avg_heart_rate);
-        rppText = (TextView) findViewById(R.id.avg_rpp);
+        ccText = (TextView) findViewById(R.id.avg_cc);
         exText = (TextView) findViewById(R.id.exercise_summary);
         suggestText = (TextView) findViewById(R.id.suggestion_sum);
         suggestAeroHeader.setVisibility(View.VISIBLE);
@@ -70,19 +66,19 @@ public class ExerciseSuggestion extends AppCompatActivity {
         suggestAnAero.setVisibility(View.VISIBLE);
 
         hrText.setText(String.valueOf(hrAvg));
-        rppText.setText(String.valueOf(rppAvg));
+        ccText.setText(String.valueOf(ccAvg));
 
-        if (rppAvg <= 12){
+        if (ccAvg <= 12){
             exText.setText("Normal");
             suggestText.setText(R.string.suggestion_normal);
             suggestAero.loadUrl("file:///android_asset/cardio_high_intensity.html");
             suggestAnAero.loadUrl("file:///android_asset/high_intensity.html");
-        }else if (rppAvg <= 17){
+        }else if (ccAvg <= 17){
             exText.setText("At Risk");
             suggestText.setText(R.string.suggestion_risk);
             suggestAero.loadUrl("file:///android_asset/cardio_medhigh_intensity.html");
             suggestAnAero.loadUrl("file:///android_asset/medhigh_intensity.html");
-        }else if (rppAvg <= 21){
+        }else if (ccAvg <= 21){
             exText.setText("Danger");
             suggestText.setText(R.string.suggestion_danger);
             suggestAero.loadUrl("file:///android_asset/cardio_lowmed_intensity.html");
