@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RPP Demo</string>
+    <string name="app_name">Cardio Capacity</string>
 
     <!--Welcome: first about page-->
     <string name="about_header">Welcome to RPP Demonstration App</string>>
@@ -22,12 +22,12 @@
     <string name="welcome_second_content5">HR is the number of times your heart beats per minute. Normal resting HR ranges between 60 and 100.</string>
     <string name="welcome_second_content6">Why is it so important to monitor your BP?</string>
     <string name="welcome_second_content7">
-        Hypertension, often referred to as the \Silent Killer,\ is the most common cardiovascular disease in America.
-        It can be easily induced by various daily activities, such as caffeine or alcohol intake, stress, and consumption of salty foods.</string>
+        Hypertension, often referred to as the Silent Killer, is the most common cardiovascular disease in America.
+        It can be easily induced by various daily activities, such as caffeine, alcohol, stress, and salty foods.</string>
     <string name="welcome_second_content8">
         However, keeping up with BP is not easy for many people, especially for those living busy lives.
         The reliability of the BP measurements at hospitals is often compromised by the White Coat Effect.
-        Hence, constant and frequent monitoring using smartphones will benefit many people\s lives</string>
+        Hence, constant and frequent monitoring using smartphones will benefit many.</string>
 
     <!--Welcome: third RPP page-->
     <string name="welcome_third_header">Rate Pressure Product</string>
@@ -42,66 +42,70 @@
         Hence, it is a good indicator examining the cardiac function, especially when the energy demand is high.</string>
     <string name="welcome_third_content7">
         Like in many journals, RPP is calculated as (SBP X HR)/1000 in this app.
-        Such calculation minimizes the error range caused by not-entirely-accurate BP measurement, and also removes the need to show BP values directly.</string>
+        Such calculation minimizes the error range of BP measurement, and also removes the need to show BP values directly.</string>
 
     <!--Welcome: fourth RPP Service page-->
-    <string name="welcome_fourth_header">RPP and Exercise</string>
-    <string name="welcome_fourth_content1">Applying RPP</string>
+    <string name="welcome_fourth_header">Cardio Capacity</string>
+    <string name="welcome_fourth_content1">RPP as Cardio Capacity</string>
     <string name="welcome_fourth_content2">
-        Previously, there were attempts of measuring physical stress level only based on HR. However, without information about BP, measuring stress solely based on HR is clearly limited.
-        On the other hand,  RPP can effectively show the degree of physical stress and exercise intensity,
-        as studied in "The rate-pressure-product as a determinant of myocardial blood flow during dipyridamole stress in healthy, young volunteers" by Meter at al. and many other journals.</string>
+        Previously, there were attempts to measure physical stress only based on HR. However, without information about BP, measuring stress solely based on HR is clearly limited.
+        On the other hand,  Cardio Capacity based on RPP can effectively show the degree of physical stress and exercise intensity.</string>
     <string name="welcome_fourth_content3">Personal Trainer on Every Smartphone</string>
     <string name="welcome_fourth_content4">
-        Exercise is not only important for keeping BP in a desirable level, but also for living a fit and healthy life. Everyone has different cardio-capacity and it is often difficult to find the most optimal work-out routine.
-        Due to the properties stated previously, based on the RPP measured during the exercise and recovery, the values can be used to determine the exercise intensity.
+        Exercise is not only important for keeping BP in a desirable level, but also for living a fit and healthy life. Everyone has exercise capacity and it is often difficult to find the most optimal work-out routine.
+        With Cardio Capacity measured during exercise and recovery, the values can be used to determine the exercise intensity.
         Ultimately, it can be used to suggest different exercises to try out in the future. With time, the clients will be able to build up an optimal work-out routine.</string>
     <string name="welcome_fourth_content5">How does it work?</string>
     <string name="welcome_fourth_content6">
-        RPP during exercise can be divided into 4 levels; Normal (~12), Risk (13~17), Danger (18~21), and Very Danger (21~). If a client\s RPP is Normal, exercise of same or slightly higher intensity will be suggested.
-        If it is at Risk, exercise of the same or slightly lower intensity will be suggested. If RPP is considered to be Danger or Very Danger, exercise of lower intensity will be suggested.</string>
-    <string name="welcome_fourth_content7">
-        If the activity with RPP greater than 21 is continued more than 2 minutes, the app will have pop-up notification recommending the user to stop the current activity.</string>
+        Exercise Intensity can be divided into 4 levels; Normal (~12), Risk (13~17), Danger (18~21), and Very Danger (21~). If it is normal, exercise of same or slightly higher intensity will be suggested.
+        If at Risk, exercise of the same or slightly lower intensity will be suggested. If it is in Danger or Very Danger zone, exercise of lower intensity will be suggested.</string>
 
     <!--Calibration Screen-->
     <string name="cal_header">User Calibration</string>
     <string name="cal_Reference">Reference</string>
     <string name="cal_button">Calibrate</string>
     <string name="cal_button_done">Done</string>
+    <string name="skpcal_button">Skip Calibrate</string>
 
     <!--Measurement Screen-->
     <string name="divider">This is a content divider</string>
     <string name="heart_icon">This is a heart icon</string>
-    <string name="rpp_icon">This is a pulse icon</string>
+    <string name="cc_icon">This is a pulse icon</string>
     <string name="exercise_icon">This is a exerise icon</string>
     <string name="connect">View Exercise Suggestions</string>
-    <string name="main_page_title">Measure RPP</string>
+    <string name="main_page_title">Measure Cardio Capacity</string>
     <string name="heart_rate_label">Heart Rate: </string>
     <string name="heart_rate"> </string>
-    <string name="rpp_label">RPP: </string>
-    <string name="rpp"> </string>
-    <string name="rpp_summary">Please Measure RPP</string>
-    <string name="measure_button">Measure RPP</string>
-    <string name="rpp_result_button">View RPP Analysis</string>
+    <string name="cc_label">Cardio Capacity: </string>
+    <string name="cc"> </string>
+    <string name="cc_summary">Please Measure Cardio Capacity</string>
+    <string name="measure_button">Measure CC</string>
+    <string name="cc_result_button">View CC Analysis</string>
 
     <!--Exercise Screen-->
     <string name="exercise_page_title">Personalized Exercise Suggestion</string>
     <string name="average_heart_rate_label">Average HR: </string>
     <string name="average_heart_rate"> </string>
-    <string name="average_rpp_label">Average RPP: </string>
-    <string name="average_rpp"> </string>
+    <string name="average_cc_label">Average CC: </string>
+    <string name="average_cc"> </string>
     <string name="exercise_label">Exercise Intensity: </string>
     <string name="exercise"> </string>
-    <string name="suggestion_default">Please measure your RPP</string>
+    <string name="suggestion_default">Please measure your Cardio Capacity</string>
     <string name="suggestion_normal">You can try out more demanding exercises</string>
     <string name="suggestion_risk">You can try out exercises of same or less intensity</string>
     <string name="suggestion_danger">You can try out exercises of same or less intensity</string>
     <string name="suggestion_vdanger">Your workout may have put too much constraint on your heart. Try less intense exercises</string>
-    <string name="previous">Measure RPP</string>
+    <string name="previous">Measure CC</string>
     <string name="more">MORE</string>
-
-    <!--Exercise Guide-->
     <string name="aerobic">Aerobic/Cardio Exercises</string>
     <string name="anaerobic">Anaerobic Exercises</string>
+
+    <!--Additional Page-->
+    <string name="additional_title">In the future</string>
+    <string name="additional_texthead1">Combining All Values</string>
+    <string name="additional_textbody1">With full information about the users, such as BMI, VO2, etc., we can deliver more comprehensive analysis of their Cardio Capacity.</string>
+    <string name="additional_texthead2">The Ultimate Fitness Solution</string>
+    <string name="additional_textbody21">With more data and case studies, can provide more diverse and appropriate exercises. For example, by allowing the users to input what exercise they have been doing, the feedback can be more relevant</string>
+    <string name="additional_textbody22">Just like a PT, the service can design full workout routine optimized for each user. Exercise Suggestion can depend on the goal of the user (i.e. losing weight, building muscle, etc.).</string>
 
 </resources>
