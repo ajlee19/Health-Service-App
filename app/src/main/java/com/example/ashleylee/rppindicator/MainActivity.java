@@ -23,8 +23,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.Viewport;
@@ -32,9 +30,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.samsung.sds.mhs.android.BPAlgorithm;
 import com.samsung.sds.mhs.android.BpEventListener;
-
 import java.util.ArrayList;
-
 import samsung.rpp_demo.R;
 
 public class MainActivity extends AppCompatActivity implements BpEventListener {
@@ -42,16 +38,15 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
     private BPAlgorithm bpAlgorithm;
     private int sbpOffset;
     private double mFeat1, mFeat2, mFeat3, mFeat4;
+    private SensorManager sensorManager;
+    private Sensor hrm;
 
-    private TextView hrText, rppText;
+    private TextView hrText, ccText;
     private Button measureBtn;
     private Animation anim, animOff;
 
-    private int aSbp, rppMeasured;
-    private ArrayList<Integer> hrData, rppData;
-
-    private SensorManager sensorManager;
-    private Sensor hrm;
+    private int aSbp, ccMeasured;
+    private ArrayList<Integer> hrData, ccData;
 
     private GraphView graph;
     private LineGraphSeries<DataPoint> series;
@@ -60,20 +55,9 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
     private LinearLayout mGradientWrapper;
     private SeekBar barGauge;
-    private static final int[][] GRADIENT_COLORS = {
-            {0, R.color.tracker_stress_gradient_first
-            }, {
-            3, R.color.tracker_stress_gradient_second
-    }, {
-            5, R.color.tracker_stress_gradient_third
-    }, {
-            15, R.color.tracker_stress_gradient_fourth
-    }, {
-            19, R.color.tracker_stress_gradient_fifth
-    }, {
-            30, R.color.tracker_stress_gradient_last
-    }
-    };
+    private static final int[][] GRADIENT_COLORS = {{0, R.color.tracker_stress_gradient_first}, {3, R.color.tracker_stress_gradient_second},
+            {5, R.color.tracker_stress_gradient_third}, {15, R.color.tracker_stress_gradient_fourth}, {19, R.color.tracker_stress_gradient_fifth},
+            {30, R.color.tracker_stress_gradient_last}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,20 +71,19 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         mFeat2 = Double.parseDouble(prefs.getString("feat2", "0"));
         mFeat3 = Double.parseDouble(prefs.getString("feat3", "0"));
         mFeat4 = Double.parseDouble(prefs.getString("feat4", "0"));
-        Toast.makeText(MainActivity.this, "Name"+ prefs.getString("Name", "default")+"Offset: "+sbpOffset+"mFeat: "+prefs.getString("feat1", "0")+prefs.getString("feat2", "0"), Toast.LENGTH_LONG).show();
 
         bpAlgorithm = new BPAlgorithm(this);
         bpAlgorithm.setBpChangedListener(this);
         bpAlgorithm.setFeature(mFeat1, mFeat2, mFeat3, mFeat4);
 
         hrText = (TextView) findViewById(R.id.heart_rate);
-        rppText = (TextView) findViewById(R.id.rpp);
+        ccText = (TextView) findViewById(R.id.rpp);
         measureBtn = (Button) findViewById(R.id.measure_button);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         hrm = sensorManager.getDefaultSensor(65584); // WHAT IS THE SENSOR TYPE
         hrData = new ArrayList<>();
-        rppData = new ArrayList<>();
+        ccData = new ArrayList<>();
 
         graph = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<DataPoint>();
@@ -141,14 +124,13 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         }
     }
 
-    public void viewRPPAnalysis(View view) {
+    public void viewCCAnalysis(View view) {
         int hrAvg = calculateAverage(hrData);
-        int rppAvg = calculateAverage(rppData);
+        int ccAvg = calculateAverage(ccData);
         turnOffSensor();
-
         Intent intent = new Intent(this, ExerciseSuggestion.class);
         intent.putExtra("hrAvg", hrAvg);
-        intent.putExtra("rppAvg", rppAvg);
+        intent.putExtra("ccAvg", ccAvg);
         startActivity(intent);
     }
 
@@ -163,17 +145,15 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         }
 
         @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        }
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {}
     };
 
     @Override
     public void onBpChanged(short sbp, short dbp, short hr) {
         aSbp = sbp + sbpOffset;
-        rppMeasured = Math.round((aSbp * hr) / 1000);
-
-        rppText.setText(String.valueOf(rppMeasured));
+        ccMeasured = Math.round((aSbp * hr) / 1000);
         hrText.setText(String.valueOf(hr));
+        ccText.setText(String.valueOf(ccMeasured));
 
         boolean scroll;
         if (xVal > 100)
@@ -181,11 +161,11 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         else
             scroll = false;
 
-        series.appendData(new DataPoint(xVal++, rppMeasured), scroll, 1000);
-        updateGraphColor(rppMeasured);
-        barGauge.setProgress(rppMeasured);
+        series.appendData(new DataPoint(xVal++, ccMeasured), scroll, 1000);
+        updateGraphColor(ccMeasured);
+        barGauge.setProgress(ccMeasured);
         hrData.add((int) hr);
-        rppData.add(rppMeasured);
+        ccData.add(ccMeasured);
     }
 
     @Override
@@ -201,11 +181,11 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
         measureBtn.startAnimation(anim);
         hrText.setText("--");
-        rppText.setText("--");
+        ccText.setText("--");
         DataPoint[] points = new DataPoint[0];
         series.resetData(points);
         hrData = new ArrayList<>();
-        rppData = new ArrayList<>();
+        ccData = new ArrayList<>();
         sensorManager.registerListener(sensorEventListener, hrm, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
@@ -213,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         if (sensorManager != null) {
             sensorManager.unregisterListener(sensorEventListener);
             measureBtn.startAnimation(animOff);
-            measureBtn.setText("Measure RPP");
+            measureBtn.setText("Measure CC");
         }
     }
 
@@ -221,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         if (data.isEmpty()) {
             return 0;
         }
+
         int tot = 0;
         for (Integer i : data) {
             tot += i;
@@ -228,14 +209,14 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         return Math.round(tot / data.size());
     }
 
-    private void updateGraphColor(int rpp) {
-        if (rpp <= 12) {
+    private void updateGraphColor(int cc) {
+        if (cc <= 12) {
             series.setColor(mColor[0]);
             series.setBackgroundColor(mColor[1]);
-        } else if (rpp <= 17) {
+        } else if (cc <= 17) {
             series.setColor(mColor[2]);
             series.setBackgroundColor(mColor[3]);
-        } else if (rpp <= 21) {
+        } else if (cc <= 21) {
             series.setColor(mColor[4]);
             series.setBackgroundColor(mColor[5]);
         } else {
