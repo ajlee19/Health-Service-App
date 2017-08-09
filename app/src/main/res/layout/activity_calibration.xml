@@ -8,11 +8,11 @@
     <!--TITLE-->
     <TextView
         android:id="@+id/cal_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/cal_header"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp" />
@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:scaleType="center"
         android:layout_below="@id/cal_label"
-        android:src="@drawable/divider" />
+        android:src="@drawable/divider"
+        android:scaleType="center"/>
 
     <EditText
         android:id="@+id/name_input"
@@ -40,15 +40,15 @@
 
     <TextView
         android:id="@+id/ref"
+        android:text="@string/cal_Reference"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name_input"
         android:layout_alignStart="@id/cal_label"
         android:layout_alignLeft="@id/cal_label"
-        android:layout_marginTop="16dp"
-        android:text="@string/cal_Reference"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:layout_marginTop="16dp"/>
 
     <EditText
         android:id="@+id/sbp_input"
