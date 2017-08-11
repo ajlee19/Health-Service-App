@@ -167,9 +167,10 @@
         android:id="@+id/bpHidden"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/hidden"
+        android:layout_alignEnd="@+id/graph"
         android:layout_alignTop="@+id/heart_rate"
-        android:text="--/--" />
+        android:text="--/--"
+        android:textSize="16sp"/>
 
 
 </RelativeLayout>
