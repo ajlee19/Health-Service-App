@@ -20,8 +20,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.Viewport;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.samsung.sds.mhs.android.BPAlgorithm;
 import com.samsung.sds.mhs.android.BpEventListener;
+
 import samsung.rpp_demo.R;
 
 public class Calibration extends AppCompatActivity implements BpEventListener {
@@ -40,6 +47,10 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefEdit;
+
+    private GraphView graph;
+    private LineGraphSeries<DataPoint> series;
+    private double xVal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +81,18 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
         }
 
         sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
-        hrm = sensorManager.getDefaultSensor(65584);
+        hrm = sensorManager.getDefaultSensor(65584); //65583 depending on the sensor
 
         bpAlgorithm = new BPAlgorithm(this);
         bpAlgorithm.setBpChangedListener(this);
 
         spinner = (ProgressBar)findViewById(R.id.progressBarCal);
         spinner.setVisibility(View.GONE);
+
+        graph = (GraphView) findViewById(R.id.calGraph);
+        series = new LineGraphSeries<DataPoint>();
+        graph.addSeries(series);
+        graphSetting();
     }
 
     SensorEventListener sensorEventListener = new SensorEventListener() {
@@ -85,6 +101,8 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
             switch (event.sensor.getType()) {
                 case 65584:
                     bpAlgorithm.pushData((int)event.values[2]);
+                    int val = (int)event.values[2];
+                    series.appendData(new DataPoint(xVal++, val), true, 1000);
                     break;
             }
         }
@@ -100,13 +118,16 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
             calButton.setText("Calibrating");
             bpAlgorithm.resetFeature();
             bpAlgorithm.resetReq();
+            DataPoint[] points = new DataPoint[0];
+            series.resetData(points);
             turnOnSensor();
         }
     }
 
     public void continueToMain(){
         prefEdit.putString("Name", nameRef.getText().toString());
-        prefEdit.putInt("SBPOffset", mDbpOffset);
+        prefEdit.putInt("SBPOffset", mSbpOffset);
+        prefEdit.putInt("DBPOffset", mDbpOffset);
         prefEdit.putString("feat1", String.valueOf(mFeat1));
         prefEdit.putString("feat2", String.valueOf(mFeat2));
         prefEdit.putString("feat3", String.valueOf(mFeat3));
@@ -122,6 +143,7 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
         turnOffSensor();
         prefEdit.putString("Name", "User");
         prefEdit.putInt("SBPOffset", 0);
+        prefEdit.putInt("DBPOffset", 0);
         prefEdit.putString("feat1", "0");
         prefEdit.putString("feat2","0");
         prefEdit.putString("feat3", "0");
@@ -194,5 +216,28 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
                 }
                 return;
         }
+    }
+
+    private void graphSetting() {
+        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL); //only horizontal grid
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(true);
+        // area below the graph
+        series.setThickness(5);
+        series.setDrawBackground(true);
+
+        Viewport viewport = graph.getViewport();
+        // set y bound
+        viewport.setYAxisBoundsManual(true);
+        viewport.setMinY(5);
+        viewport.setMaxY(25);
+        // set x bound
+        viewport.setXAxisBoundsManual(true);
+        viewport.setMinX(0);
+        viewport.setMaxX(100);
+
+        viewport.setScrollable(true);
+        //viewport.setScrollableY(true);
+        //viewport.setScalable(true);
+        viewport.setScalableY(true);
     }
 }
