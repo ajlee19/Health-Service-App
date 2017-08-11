@@ -36,16 +36,16 @@ import samsung.rpp_demo.R;
 public class MainActivity extends AppCompatActivity implements BpEventListener {
 
     private BPAlgorithm bpAlgorithm;
-    private int sbpOffset;
+    private int sbpOffset, dbpOffset;
     private double mFeat1, mFeat2, mFeat3, mFeat4;
     private SensorManager sensorManager;
     private Sensor hrm;
 
-    private TextView hrText, ccText;
-    private Button measureBtn;
+    private TextView hrText, ccText, bp;
+    private Button measureBtn, hidden;
     private Animation anim, animOff;
 
-    private int aSbp, ccMeasured;
+    private int aSbp, aDbp, ccMeasured;
     private ArrayList<Integer> hrData, ccData;
 
     private GraphView graph;
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
 
         SharedPreferences prefs = getSharedPreferences("user", Context.MODE_PRIVATE);
         sbpOffset = prefs.getInt("SBPOffset", 0);
+        dbpOffset = prefs.getInt("DBPOffset",0);
         mFeat1 = Double.parseDouble(prefs.getString("feat1", "0"));
         mFeat2 = Double.parseDouble(prefs.getString("feat2", "0"));
         mFeat3 = Double.parseDouble(prefs.getString("feat3", "0"));
@@ -77,11 +78,28 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         bpAlgorithm.setFeature(mFeat1, mFeat2, mFeat3, mFeat4);
 
         hrText = (TextView) findViewById(R.id.heart_rate);
-        ccText = (TextView) findViewById(R.id.rpp);
+        ccText = (TextView) findViewById(R.id.cc);
+        bp = (TextView) findViewById(R.id.bpHidden);
+        bp.setVisibility(View.GONE);
+
         measureBtn = (Button) findViewById(R.id.measure_button);
+        hidden = (Button) findViewById(R.id.hidden);
+        hidden.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(! hidden.getText().toString().equals("BP")){
+                    bp.setVisibility(View.VISIBLE);
+                    hidden.setText("BP");
+                }else{
+                    hidden.setText("     ");
+                    bp.setVisibility(View.GONE);
+                }
+            }
+        });
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        hrm = sensorManager.getDefaultSensor(65584); // WHAT IS THE SENSOR TYPE
+//        hrm = sensorManager.getDefaultSensor(65584);
+        hrm = sensorManager.getDefaultSensor(65584);
         hrData = new ArrayList<>();
         ccData = new ArrayList<>();
 
@@ -138,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         @Override
         public void onSensorChanged(SensorEvent event) {
             switch (event.sensor.getType()) {
-                case 65584:
+                case 65584: // DEPENDS ON THE SENSOR
                     bpAlgorithm.pushData((int) event.values[2]);
                     break;
             }
@@ -151,9 +169,11 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
     @Override
     public void onBpChanged(short sbp, short dbp, short hr) {
         aSbp = sbp + sbpOffset;
+        aDbp = dbp + dbpOffset;
         ccMeasured = Math.round((aSbp * hr) / 1000);
         hrText.setText(String.valueOf(hr));
         ccText.setText(String.valueOf(ccMeasured));
+        bp.setText(String.valueOf(aSbp) + " / " + String.valueOf(aDbp));
 
         boolean scroll;
         if (xVal > 100)
@@ -243,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements BpEventListener {
         viewport.setMaxX(100);
 
         viewport.setScrollable(true);
-        viewport.setScalableY(true);
+        //viewport.setScrollableY(true);
         //viewport.setScalable(true);
         viewport.setScalableY(true);
 
