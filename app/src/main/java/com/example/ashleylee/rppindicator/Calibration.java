@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -43,7 +42,6 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
 
     private Button calButton, skipBtm;
     private EditText sbpRef, dbpRef, nameRef;
-    private ProgressBar spinner;
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefEdit;
@@ -86,8 +84,8 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
         bpAlgorithm = new BPAlgorithm(this);
         bpAlgorithm.setBpChangedListener(this);
 
-        spinner = (ProgressBar)findViewById(R.id.progressBarCal);
-        spinner.setVisibility(View.GONE);
+//        spinner = (ProgressBar)findViewById(R.id.progressBarCal);
+//        spinner.setVisibility(View.GONE);
 
         graph = (GraphView) findViewById(R.id.calGraph);
         series = new LineGraphSeries<DataPoint>();
@@ -102,7 +100,7 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
                 case 65584:
                     bpAlgorithm.pushData((int)event.values[2]);
                     int val = (int)event.values[2];
-                    series.appendData(new DataPoint(xVal++, val), true, 1000);
+                    series.appendData(new DataPoint(xVal++, val), true, 300);
                     break;
             }
         }
@@ -112,14 +110,16 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
 
     public void calibrate(View view){
         if (calButton.getText().toString().equals("Done")){
+            // reset
+            calButton.setText("Calibrate");
+            DataPoint[] points = new DataPoint[0];
+            series.resetData(points);
             continueToMain();
         } else {
-            spinner.setVisibility(View.VISIBLE);
+//            spinner.setVisibility(View.VISIBLE);
             calButton.setText("Calibrating");
             bpAlgorithm.resetFeature();
             bpAlgorithm.resetReq();
-            DataPoint[] points = new DataPoint[0];
-            series.resetData(points);
             turnOnSensor();
         }
     }
@@ -176,7 +176,7 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
         mFeat3 = feat3;
         mFeat4 = feat4;
         turnOffSensor();
-        spinner.setVisibility(View.GONE);
+//        spinner.setVisibility(View.GONE);
         calButton.setText("Done");
     }
 
@@ -220,24 +220,19 @@ public class Calibration extends AppCompatActivity implements BpEventListener {
 
     private void graphSetting() {
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL); //only horizontal grid
-        graph.getGridLabelRenderer().setHorizontalLabelsVisible(true);
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
         // area below the graph
         series.setThickness(5);
         series.setDrawBackground(true);
 
         Viewport viewport = graph.getViewport();
-        // set y bound
-        viewport.setYAxisBoundsManual(true);
-        viewport.setMinY(5);
-        viewport.setMaxY(25);
         // set x bound
         viewport.setXAxisBoundsManual(true);
         viewport.setMinX(0);
-        viewport.setMaxX(100);
+        viewport.setMaxX(300);
 
         viewport.setScrollable(true);
-        //viewport.setScrollableY(true);
-        //viewport.setScalable(true);
         viewport.setScalableY(true);
     }
 }
