@@ -106,28 +106,29 @@
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/cal_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp" />
+        android:layout_alignTop="@+id/divider"
+        android:layout_alignEnd="@+id/skpcalbtn" />
 
     <Button
         android:id="@+id/skpcalbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sbp_input"
-        android:layout_alignStart="@id/sbp_input"
-        android:layout_marginTop="16dp"
+        android:layout_above="@id/divider"
+        android:layout_alignBottom="@id/cal_label"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp"
         android:background="@null"
         android:text="Skip Calibration"/>
 
-    <!--<com.jjoe64.graphview.GraphView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dip"-->
-        <!--android:layout_above="@id/cal_button"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginLeft="24dp"-->
-        <!--android:layout_marginRight="24dp"-->
-        <!--android:id="@+id/graph" />-->
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:layout_above="@id/cal_button"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:id="@+id/calGraph" />
+
     <!--<ProgressBar-->
         <!--android:id="@+id/progressBarCal"-->
         <!--style="?android:attr/progressBarStyleHorizontal"-->
